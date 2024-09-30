@@ -105,7 +105,7 @@ const HomePage = () => {
             imageUrl={recipe.imageUrl}
             categories={recipe.categories}
             timeInMins={recipe.timeInMins}
-            id={recipe.id} // Se till att id är tillgängligt i receptobjekten
+            id={recipe._id}
           />
         ))}
       </div>
