@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import RecipeCard from './RecipeCard';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import RecipeCard from "./RecipeCard";
+import { Link, useNavigate } from "react-router-dom"; // Importera useNavigate
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]); // Initialisera recept
   const [loading, setLoading] = useState(true); // Laddningsstatus
   const [error, setError] = useState(null); // Felstatus
-  const [searchTerm, setSearchTerm] = useState(''); // Sökterm
+  const [searchTerm, setSearchTerm] = useState(""); // Sökterm
   const [filteredRecipes, setFilteredRecipes] = useState([]); // Filtrerade recept
   const [categories, setCategories] = useState([]); // Kategorier
-  const [selectedCategory, setSelectedCategory] = useState(''); // Vald kategori
+  const [selectedCategory, setSelectedCategory] = useState(""); // Vald kategori
+
+  const navigate = useNavigate(); // För att navigera till en ny URL
 
   // Funktion för att slumpa recepten
   const shuffleRecipes = (arr) => {
@@ -23,16 +25,16 @@ const HomePage = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await fetch('https://recept9-pedal.reky.se/recipes');
+        const response = await fetch("https://recept9-pedal.reky.se/recipes");
         if (!response.ok) {
-          throw new Error('Något gick fel vid hämtningen av data.');
+          throw new Error("Något gick fel vid hämtningen av data.");
         }
         const data = await response.json();
         const shuffled = shuffleRecipes(data); // Slumpa recepten
         setRecipes(shuffled); // Sätt recepten
         setFilteredRecipes(shuffled); // Sätt de filtrerade recepten
 
-        const allCategories = data.flatMap(recipe => recipe.categories);
+        const allCategories = data.flatMap((recipe) => recipe.categories);
         const uniqueCategories = [...new Set(allCategories)];
         setCategories(uniqueCategories); // Sätt unika kategorier
       } catch (error) {
@@ -48,7 +50,7 @@ const HomePage = () => {
   // Filtrera recepten baserat på sökterm
   useEffect(() => {
     if (searchTerm) {
-      const results = recipes.filter(recipe =>
+      const results = recipes.filter((recipe) =>
         recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredRecipes(results);
@@ -66,11 +68,13 @@ const HomePage = () => {
   const handleCategoryChange = (e) => {
     const selected = e.target.value;
     setSelectedCategory(selected);
+
     if (selected) {
-      const results = recipes.filter(recipe => recipe.categories.includes(selected));
-      setFilteredRecipes(results);
+      // Navigera till URL med vald kategori
+      navigate(`/recept/kategori/${selected}`);
     } else {
       setFilteredRecipes(recipes);
+      navigate("/"); // Navigera tillbaka till root om ingen kategori är vald
     }
   };
 
@@ -91,10 +95,16 @@ const HomePage = () => {
         onChange={handleSearchChange}
         className="search-input"
       />
-      <select value={selectedCategory} onChange={handleCategoryChange} className="category-dropdown">
+      <select
+        value={selectedCategory}
+        onChange={handleCategoryChange}
+        className="category-dropdown"
+      >
         <option value="">Alla Kategorier</option>
         {categories.map((category, index) => (
-          <option key={index} value={category}>{category}</option>
+          <option key={index} value={category}>
+            {category}
+          </option>
         ))}
       </select>
       <div className="recipes">
@@ -105,7 +115,7 @@ const HomePage = () => {
             imageUrl={recipe.imageUrl}
             categories={recipe.categories}
             timeInMins={recipe.timeInMins}
-            id={recipe.id} // Se till att id är tillgängligt i receptobjekten
+            id={recipe._id}
           />
         ))}
       </div>
