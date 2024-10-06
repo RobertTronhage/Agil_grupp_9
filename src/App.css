@@ -40,3 +40,16 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Styling för RecipeCard */
+.recipe-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  margin: 1rem;
+  text-align: center;
+}
+
+.recipe-card img {
+  max-width: 100px;
+  margin-top: 10px;
+}

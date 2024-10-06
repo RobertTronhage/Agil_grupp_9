@@ -1,16 +1,37 @@
-// RecipeCard.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const RecipeCard = ({ title, imageUrl, categories, timeInMins, id }) => {
+// Funktion som bestämmer svårighetsgraden baserat på tid
+const getDifficulty = (time) => {
+  if (time < 30) return 'Easy';   // Enkel
+  if (time >= 30 && time <= 60) return 'Medium';  // Medel
+  return 'Hard';  // Svår
+};
+
+// Funktion som returnerar bildvägen baserat på svårighetsgraden
+const getDifficultyImage = (difficulty) => {
+  switch (difficulty) {
+    case 'Easy':
+      return '/path/to/easy-image.png';  // Använd den faktiska vägen till bilden
+    case 'Medium':
+      return '/path/to/medium-image.png';
+    case 'Hard':
+      return '/path/to/hard-image.png';
+    default:
+      return null;
+  }
+};
+
+const RecipeCard = ({ recipe }) => {
+  const difficulty = getDifficulty(recipe.time);
+  const difficultyImage = getDifficultyImage(difficulty);
+
   return (
     <div className="recipe-card">
-      <Link to={`/recept/${id}`}>
-        <img src={imageUrl} alt={title} />
-        <h3>{title}</h3>
-        <p>{categories.join(', ')}</p>
-        <p>{timeInMins} minuter</p>
-      </Link>
+      <h2>{recipe.name}</h2>
+      <p>Baking Time: {recipe.time} minutes</p>
+      <p>Difficulty: {difficulty}</p>
+      {/* Visar svårighetsbilden */}
+      <img src={difficultyImage} alt={`${difficulty} level`} />
     </div>
   );
 };
