@@ -62,7 +62,7 @@ const CategoryPage = () => {
               imageUrl={recipe.imageUrl}
               categories={recipe.categories}
               timeInMins={recipe.timeInMins}
-              id={recipe.id}
+              id={recipe._id}
             />
           ))
         ) : (
