@@ -11,7 +11,7 @@ const HomePage = () => {
   const [categories, setCategories] = useState([]); // Kategorier
   const [selectedCategory, setSelectedCategory] = useState(""); // Vald kategori
 
-  const navigate = useNavigate(); // För att navigera till en ny URL
+  const navigate = useNavigate();
 
   // Funktion för att slumpa recepten
   const shuffleRecipes = (arr) => {
