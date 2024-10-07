@@ -44,3 +44,21 @@ input.search-input {
   padding: 10px;
   margin-bottom: 20px;
 }
+
+.rating {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.rating span {
+  font-size: 24px;
+  cursor: pointer;
+  color: lightgray;
+  transition: color 0.2s;
+}
+
+.rating span:hover,
+.rating span:hover ~ span {
+  color: gold;
+}

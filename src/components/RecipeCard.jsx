@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Importera Link för navigering
+import Rating from './Rating'; // Importera Rating-komponenten
 
 // Funktion som bestämmer svårighetsgraden baserat på tid
 const getDifficulty = (time) => {
@@ -26,6 +27,12 @@ const RecipeCard = ({ title, imageUrl, categories, timeInMins, id }) => {
   const difficulty = getDifficulty(timeInMins);
   const difficultyImage = getDifficultyImage(difficulty);
 
+  // Callback-funktion för att hantera när rating ändras
+  const handleRatingChange = (newRating) => {
+    console.log(`Ny rating för ${title}: ${newRating}`);
+    // Här kan du skicka ny rating till din backend eller uppdatera state
+  };
+
   return (
     <div className="recipe-card">
       {/* Link runt hela receptkortet för att navigera till receptdetaljer */}
@@ -37,6 +44,9 @@ const RecipeCard = ({ title, imageUrl, categories, timeInMins, id }) => {
         <p>Svårighetsgrad:</p>
         {difficultyImage && <img src={difficultyImage} alt={`${difficulty} level`} />}
       </Link>
+      
+      {/* Rating-sektion */}
+      <Rating onRatingChange={handleRatingChange} />
     </div>
   );
 };
