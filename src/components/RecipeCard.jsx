@@ -21,17 +21,18 @@ const getDifficultyImage = (difficulty) => {
   }
 };
 
-const RecipeCard = ({ recipe }) => {
-  const difficulty = getDifficulty(recipe.time);
+const RecipeCard = ({  title, imageUrl, categories, timeInMins  }) => {
+  const difficulty = getDifficulty(timeInMins);
   const difficultyImage = getDifficultyImage(difficulty);
 
   return (
     <div className="recipe-card">
-      <h2>{recipe.name}</h2>
-      <p>Baking Time: {recipe.time} minutes</p>
-      <p>Difficulty: {difficulty}</p>
-      {/* Visar svårighetsbilden */}
-      <img src={difficultyImage} alt={`${difficulty} level`} />
+      <img src={imageUrl || 'default-image-url.jpg'} alt={title || 'Recept'} />
+      <h2>{title || 'Recept utan namn'}</h2>
+      <p>Kategori: {categories ? categories.join(', ') : 'Okänd kategori'}</p>
+      <p>Tid: {timeInMins ? `${timeInMins} minuter` : 'Okänd tid'}</p>
+      <p>Svårighetsgrad:</p>
+      {difficultyImage && <img src={difficultyImage} alt={`${difficulty} level`} />}
     </div>
   );
 };
