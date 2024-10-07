@@ -1,55 +1,46 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 3fr; /* 1/4 för aside, 3/4 för content */
+  grid-template-rows: auto 1fr;  /* För header överst */
+  grid-template-areas:
+    "header header"
+    "aside main";
+  gap: 20px;
+  padding: 20px;
+  height: 100vh;
+}
+
+header {
+  grid-area: header;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+aside {
+  grid-area: aside;
+  background-color: #f4f4f4;
+  padding: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+main {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-/* Styling för RecipeCard */
 .recipe-card {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  margin: 1rem;
+  border: 1px solid #ddd;
+  padding: 10px;
   text-align: center;
 }
 
-.recipe-card img {
-  max-width: 100px;
-  margin-top: 10px;
+input.search-input {
+  width: 60%;
+  padding: 10px;
+  margin-bottom: 20px;
 }
