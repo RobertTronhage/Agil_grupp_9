@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
+import Header from "./Header"; // Importera Header-komponenten
 
 const CategoryPage = () => {
-  const { kategori } = useParams(); // Hämta 'kategori' från URL-parametrarna
-  const [recipes, setRecipes] = useState([]); // State för att lagra recepten
-  const [loading, setLoading] = useState(true); // State för att hantera laddning
-  const [error, setError] = useState(null); // State för felhantering
+  const { kategori } = useParams(); 
+  const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchRecipesByCategory = async () => {
@@ -17,58 +20,80 @@ const CategoryPage = () => {
         }
         const data = await response.json();
 
-        console.log("Alla recept:", data);
-        console.log("Vald kategori från URL:", kategori); // OBS: kolla att 'kategori' inte är undefined
-
-        // Filtrera recepten och säkerställ att 'categories' inte är undefined
         const filteredRecipes = data.filter(
           (recipe) =>
-            Array.isArray(recipe.categories) && // Kontrollera att 'categories' är en array
+            Array.isArray(recipe.categories) &&
             recipe.categories.some(
               (cat) => cat.toLowerCase() === kategori.toLowerCase()
             )
         );
 
-        console.log("Filtrerade recept:", filteredRecipes);
+        setRecipes(filteredRecipes); 
 
-        setRecipes(filteredRecipes); // Sätt de filtrerade recepten
+        const allCategories = data.flatMap((recipe) => recipe.categories);
+        const uniqueCategories = [...new Set(allCategories)];
+        setCategories(uniqueCategories); 
       } catch (error) {
-        setError(error.message); // Sätt felmeddelande
+        setError(error.message); 
       } finally {
-        setLoading(false); // Sluta ladda
+        setLoading(false); 
       }
     };
 
     fetchRecipesByCategory();
-  }, [kategori]); // Notera att vi använder 'kategori' här
+  }, [kategori]);
+
+  const handleSearchChange = (searchTerm) => {
+    setSearchTerm(searchTerm);
+  };
+
+  const filteredRecipes = recipes.filter((recipe) =>
+    recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   if (loading) {
-    return <p>Loading...</p>; // Visa laddningstext
+    return <p>Loading...</p>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>; // Visa felmeddelande
+    return <p>Error: {error}</p>;
   }
 
   return (
-    <div className="category-page">
-      <h2>Recept i kategorin: {kategori}</h2> {/* Använd 'kategori' här */}
-      <div className="recipes">
-        {recipes.length > 0 ? (
-          recipes.map((recipe, index) => (
-            <RecipeCard
-              key={index}
-              title={recipe.title}
-              imageUrl={recipe.imageUrl}
-              categories={recipe.categories}
-              timeInMins={recipe.timeInMins}
-              id={recipe._id}
-            />
-          ))
-        ) : (
-          <p>Inga recept hittades i denna kategori.</p>
-        )}
-      </div>
+    <div className="container">
+      {/* Använd Header-komponenten med sökfält och home-icon */}
+      <Header searchTerm={searchTerm} onSearchChange={handleSearchChange} />
+
+      <aside>
+        <h3>Kategorier:</h3>
+        <ul>
+          {categories.map((category, index) => (
+            <li key={index}>
+              <a href={`/recept/kategori/${category}`}>{category}</a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+
+      <main>
+        <h2>Recept i kategorin: {kategori}</h2>
+        <div className="recipes">
+          {filteredRecipes.length > 0 ? (
+            filteredRecipes.map((recipe, index) => (
+              <RecipeCard
+                key={index}
+                title={recipe.title}
+                imageUrl={recipe.imageUrl}
+                categories={recipe.categories}
+                timeInMins={recipe.timeInMins}
+                id={recipe._id}
+              />
+            ))
+          ) : (
+            <p>Inga recept hittades i denna kategori.</p>
+          )}
+        </div>
+      </main>
     </div>
   );
 };
