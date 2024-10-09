@@ -8,7 +8,6 @@ const CategoryPage = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchRecipesByCategory = async () => {
@@ -19,7 +18,7 @@ const CategoryPage = () => {
         }
         const data = await response.json();
 
-        // Filtrerar recept baserat på kategori
+        // Filtrera recept baserat på kategori
         const filteredRecipes = data.filter(
           (recipe) =>
             Array.isArray(recipe.categories) &&
@@ -39,32 +38,21 @@ const CategoryPage = () => {
     fetchRecipesByCategory();
   }, [kategori]);
 
-  // Hanterar sökningar inom den valda kategorin
-  const handleSearchChange = (searchValue) => {
-    setSearchTerm(searchValue);
-  };
-
-  // Filtrerar recept baserat på sökterm inom den valda kategorin
-  const filteredRecipes = recipes.filter((recipe) =>
-    recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   if (loading) {
-    return <p>Laddar...</p>;
+    return <p>Loading...</p>;
   }
 
   if (error) {
-    return <p>Fel: {error}</p>;
+    return <p>Error: {error}</p>;
   }
 
   return (
     <div className="container">
-      {/* Inkluderar Header med sökfält */}
-      <Header searchTerm={searchTerm} onSearchChange={handleSearchChange} />
+      <Header />
       <h2>Recept i kategorin: {kategori}</h2>
       <div className="recipes">
-        {filteredRecipes.length > 0 ? (
-          filteredRecipes.map((recipe, index) => (
+        {recipes.length > 0 ? (
+          recipes.map((recipe, index) => (
             <RecipeCard
               key={index}
               title={recipe.title}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 import Header from "./Header";
-import CategorySelector from "./CategorySelector"; // Kontrollera att sökvägen är korrekt
+import Aside from "./Aside"; // Lägg till detta istället för CategorySelector
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -40,16 +40,13 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
+    // Filtrera recept baserat på sökterm
     const filtered = recipes.filter((recipe) => {
-      const matchesSearch = recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory = selectedCategory
-        ? recipe.categories.includes(selectedCategory)
-        : true;
-      return matchesSearch && matchesCategory;
+      return recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
     setFilteredRecipes(filtered);
-  }, [searchTerm, selectedCategory, recipes]);
+  }, [searchTerm, recipes]);
 
   const handleSearchChange = (searchValue) => {
     setSearchTerm(searchValue);
@@ -57,6 +54,12 @@ const HomePage = () => {
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
+    if (category) {
+      navigate(`/recept/kategori/${category}`);
+    } else {
+      setFilteredRecipes(recipes);
+      navigate("/");
+    }
   };
 
   if (loading) {
@@ -70,11 +73,7 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <Header searchTerm={searchTerm} onSearchChange={handleSearchChange} />
-      <CategorySelector
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onCategoryChange={handleCategoryChange}
-      />
+      <Aside categories={categories} selectedCategory={selectedCategory} />
       <div className="recipes">
         {filteredRecipes.map((recipe, index) => (
           <RecipeCard
