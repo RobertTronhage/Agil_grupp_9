@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
-import Header from "./Header"; // Importera Header-komponenten
+import Header from "./Header";
 
 const CategoryPage = () => {
-  const { kategori } = useParams(); 
+  const { kategori } = useParams();
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [categories, setCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -20,6 +19,7 @@ const CategoryPage = () => {
         }
         const data = await response.json();
 
+        // Filtrerar recept baserat på kategori
         const filteredRecipes = data.filter(
           (recipe) =>
             Array.isArray(recipe.categories) &&
@@ -28,72 +28,56 @@ const CategoryPage = () => {
             )
         );
 
-        setRecipes(filteredRecipes); 
-
-        const allCategories = data.flatMap((recipe) => recipe.categories);
-        const uniqueCategories = [...new Set(allCategories)];
-        setCategories(uniqueCategories); 
+        setRecipes(filteredRecipes);
       } catch (error) {
-        setError(error.message); 
+        setError(error.message);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
     fetchRecipesByCategory();
   }, [kategori]);
 
-  const handleSearchChange = (searchTerm) => {
-    setSearchTerm(searchTerm);
+  // Hanterar sökningar inom den valda kategorin
+  const handleSearchChange = (searchValue) => {
+    setSearchTerm(searchValue);
   };
 
+  // Filtrerar recept baserat på sökterm inom den valda kategorin
   const filteredRecipes = recipes.filter((recipe) =>
     recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>Laddar...</p>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p>Fel: {error}</p>;
   }
 
   return (
     <div className="container">
-      {/* Använd Header-komponenten med sökfält och home-icon */}
+      {/* Inkluderar Header med sökfält */}
       <Header searchTerm={searchTerm} onSearchChange={handleSearchChange} />
-
-      <aside>
-        <h3>Kategorier:</h3>
-        <ul>
-          {categories.map((category, index) => (
-            <li key={index}>
-              <a href={`/recept/kategori/${category}`}>{category}</a>
-            </li>
-          ))}
-        </ul>
-      </aside>
-
-      <main>
-        <h2>Recept i kategorin: {kategori}</h2>
-        <div className="recipes">
-          {filteredRecipes.length > 0 ? (
-            filteredRecipes.map((recipe, index) => (
-              <RecipeCard
-                key={index}
-                title={recipe.title}
-                imageUrl={recipe.imageUrl}
-                categories={recipe.categories}
-                timeInMins={recipe.timeInMins}
-                id={recipe._id}
-              />
-            ))
-          ) : (
-            <p>Inga recept hittades i denna kategori.</p>
-          )}
-        </div>
-      </main>
+      <h2>Recept i kategorin: {kategori}</h2>
+      <div className="recipes">
+        {filteredRecipes.length > 0 ? (
+          filteredRecipes.map((recipe, index) => (
+            <RecipeCard
+              key={index}
+              title={recipe.title}
+              imageUrl={recipe.imageUrl}
+              categories={recipe.categories}
+              timeInMins={recipe.timeInMins}
+              id={recipe._id}
+            />
+          ))
+        ) : (
+          <p>Inga recept hittades i denna kategori.</p>
+        )}
+      </div>
     </div>
   );
 };

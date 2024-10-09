@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 import Header from "./Header";
-import Aside from "./Aside"; // Importera Aside-komponenten
+import CategorySelector from "./CategorySelector"; // Kontrollera att sökvägen är korrekt
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -15,13 +15,6 @@ const HomePage = () => {
 
   const navigate = useNavigate();
 
-  const shuffleRecipes = (arr) => {
-    return arr
-      .map((a) => ({ sort: Math.random(), value: a }))
-      .sort((a, b) => a.sort - b.sort)
-      .map((a) => a.value);
-  };
-
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
@@ -30,9 +23,8 @@ const HomePage = () => {
           throw new Error("Något gick fel vid hämtningen av data.");
         }
         const data = await response.json();
-        const shuffled = shuffleRecipes(data);
-        setRecipes(shuffled);
-        setFilteredRecipes(shuffled);
+        setRecipes(data);
+        setFilteredRecipes(data);
 
         const allCategories = data.flatMap((recipe) => recipe.categories);
         const uniqueCategories = [...new Set(allCategories)];
@@ -48,15 +40,16 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    if (searchTerm) {
-      const results = recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredRecipes(results);
-    } else {
-      setFilteredRecipes(recipes);
-    }
-  }, [searchTerm, recipes]);
+    const filtered = recipes.filter((recipe) => {
+      const matchesSearch = recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = selectedCategory
+        ? recipe.categories.includes(selectedCategory)
+        : true;
+      return matchesSearch && matchesCategory;
+    });
+
+    setFilteredRecipes(filtered);
+  }, [searchTerm, selectedCategory, recipes]);
 
   const handleSearchChange = (searchValue) => {
     setSearchTerm(searchValue);
@@ -64,13 +57,6 @@ const HomePage = () => {
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-
-    if (category) {
-      navigate(`/recept/kategori/${category}`);
-    } else {
-      setFilteredRecipes(recipes);
-      navigate("/");
-    }
   };
 
   if (loading) {
@@ -84,26 +70,22 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <Header searchTerm={searchTerm} onSearchChange={handleSearchChange} />
-
-      {/* Lägger till Aside-komponenten med kategorilistan */}
-      <div className="main-content">
-        <Aside 
-          categories={categories} 
-          selectedCategory={selectedCategory} 
-        />
-
-        <div className="recipes">
-          {filteredRecipes.map((recipe, index) => (
-            <RecipeCard
-              key={index}
-              title={recipe.title}
-              imageUrl={recipe.imageUrl}
-              categories={recipe.categories}
-              timeInMins={recipe.timeInMins}
-              id={recipe._id}
-            />
-          ))}
-        </div>
+      <CategorySelector
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryChange={handleCategoryChange}
+      />
+      <div className="recipes">
+        {filteredRecipes.map((recipe, index) => (
+          <RecipeCard
+            key={index}
+            title={recipe.title}
+            imageUrl={recipe.imageUrl}
+            categories={recipe.categories}
+            timeInMins={recipe.timeInMins}
+            id={recipe._id}
+          />
+        ))}
       </div>
     </div>
   );
