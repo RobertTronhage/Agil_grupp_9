@@ -62,11 +62,12 @@ const CommentSection = ({id}) =>{
     };
     return(
         <div>
-            <h3>Kommentarer</h3>
-            <CommentList comments={comments} />
+            <h3>Skriv en kommentar</h3>
             <CommentForm onSubmit={handleSubmitComment} />
             {sucessMessage && <p style={{ color: "green" }}>{sucessMessage}</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}
+            <h3>Kommentarer</h3>
+            <CommentList comments={comments} />
         </div>
     )
 }
