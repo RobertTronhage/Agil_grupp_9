@@ -13,8 +13,8 @@ const Aside = ({ categories, selectedCategory }) => {
         </li>
         {categories.map((category, index) => (
           <li key={index}>
-            <Link 
-              to={`/recept/kategori/${category}`} 
+            <Link
+              to={`/recept/kategori/${category}`}
               className={selectedCategory === category ? 'active' : ''}>
               {category}
             </Link>
