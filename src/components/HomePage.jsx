@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 import Header from "./Header";
-import Aside from "./Aside"; // Lägg till detta istället för CategorySelector
+import Aside from "./Aside";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -71,20 +71,22 @@ const HomePage = () => {
   }
 
   return (
-    <div className="home-page">
+    <div className="container">
       <Header searchTerm={searchTerm} onSearchChange={handleSearchChange} />
-      <Aside categories={categories} selectedCategory={selectedCategory} />
-      <div className="recipes">
-        {filteredRecipes.map((recipe, index) => (
-          <RecipeCard
-            key={index}
-            title={recipe.title}
-            imageUrl={recipe.imageUrl}
-            categories={recipe.categories}
-            timeInMins={recipe.timeInMins}
-            id={recipe._id}
-          />
-        ))}
+      <div className="content-wrapper">
+        <Aside categories={categories} selectedCategory={selectedCategory} />
+        <div className="recipes">
+          {filteredRecipes.map((recipe, index) => (
+            <RecipeCard
+              key={index}
+              title={recipe.title}
+              imageUrl={recipe.imageUrl}
+              categories={recipe.categories}
+              timeInMins={recipe.timeInMins}
+              id={recipe._id}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
