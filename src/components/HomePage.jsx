@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 import Header from "./Header";
-import Aside from "./Aside"; // Importera Aside-komponenten
+import Aside from "./Aside";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -15,13 +15,6 @@ const HomePage = () => {
 
   const navigate = useNavigate();
 
-  const shuffleRecipes = (arr) => {
-    return arr
-      .map((a) => ({ sort: Math.random(), value: a }))
-      .sort((a, b) => a.sort - b.sort)
-      .map((a) => a.value);
-  };
-
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
@@ -30,9 +23,8 @@ const HomePage = () => {
           throw new Error("Något gick fel vid hämtningen av data.");
         }
         const data = await response.json();
-        const shuffled = shuffleRecipes(data);
-        setRecipes(shuffled);
-        setFilteredRecipes(shuffled);
+        setRecipes(data);
+        setFilteredRecipes(data);
 
         const allCategories = data.flatMap((recipe) => recipe.categories);
         const uniqueCategories = [...new Set(allCategories)];
@@ -48,14 +40,12 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    if (searchTerm) {
-      const results = recipes.filter((recipe) =>
-        recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredRecipes(results);
-    } else {
-      setFilteredRecipes(recipes);
-    }
+    // Filtrera recept baserat på sökterm
+    const filtered = recipes.filter((recipe) => {
+      return recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+
+    setFilteredRecipes(filtered);
   }, [searchTerm, recipes]);
 
   const handleSearchChange = (searchValue) => {
@@ -64,7 +54,6 @@ const HomePage = () => {
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-
     if (category) {
       navigate(`/recept/kategori/${category}`);
     } else {
@@ -82,16 +71,10 @@ const HomePage = () => {
   }
 
   return (
-    <div className="home-page">
+    <div className="container">
       <Header searchTerm={searchTerm} onSearchChange={handleSearchChange} />
-
-      {/* Lägger till Aside-komponenten med kategorilistan */}
-      <div className="main-content">
-        <Aside 
-          categories={categories} 
-          selectedCategory={selectedCategory} 
-        />
-
+      <div className="content-wrapper">
+        <Aside categories={categories} selectedCategory={selectedCategory} />
         <div className="recipes">
           {filteredRecipes.map((recipe, index) => (
             <RecipeCard
