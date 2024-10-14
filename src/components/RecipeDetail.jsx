@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Comments from './Comment';
-import CommentForm from './CommentForm';
+import CommentSection from './Comment/CommentSection';
 
 const RecipeDetail = () => {
   const { id } = useParams(); // Hämta ID från URL
@@ -65,8 +64,7 @@ const RecipeDetail = () => {
       <p>Tid: {recipe.timeInMins} minuter</p>
       <p>Kategorier: {recipe.categories.join(', ')}</p>
 
-      <Comments />
-      <CommentForm id={id}/>
+      <CommentSection id={id} />
     </div>
   );
 };
