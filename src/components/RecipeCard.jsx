@@ -1,23 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
+import enkelImage from "../assets/enkel.png";
+import medelImage from "../assets/medel.png";
+import avanceradImage from "../assets/avancerad.png";
 
 // Funktion som bestämmer svårighetsgraden baserat på tid
 const getDifficulty = (time) => {
-  if (time < 30) return 'Easy';   // Enkel
-  if (time >= 30 && time <= 60) return 'Medium';  // Medel
-  return 'Hard';  // Svår
+  if (time < 30) return 'Enkel';   // Enkel
+  if (time >= 30 && time <= 60) return 'Medel';  // Medel
+  return 'Avancerad';  // Avancerad
 };
 
 // Funktion som returnerar bildvägen baserat på svårighetsgraden
 const getDifficultyImage = (difficulty) => {
-  switch (difficulty) {
-    case 'Easy':
-      return '/path/to/easy-image.png';  // Använd den faktiska vägen till bilden
-    case 'Medium':
-      return '/path/to/medium-image.png';
-    case 'Hard':
-      return '/path/to/hard-image.png';
+  switch (difficulty.toLowerCase()) {
+    case 'enkel':
+      return enkelImage;  // Bild för "Enkel"
+    case 'medel':
+      return medelImage;  // Bild för "Medel"
+    case 'avancerad':
+      return avanceradImage;  // Bild för "Avancerad"
     default:
       return null;
   }
@@ -42,7 +45,18 @@ const RecipeCard = ({ title, imageUrl, categories, timeInMins, id }) => {
         <p>Kategori: {categories ? categories.join(', ') : 'Okänd kategori'}</p>
         <p>Tid: {timeInMins ? `${timeInMins} minuter` : 'Okänd tid'}</p>
         <p>Svårighetsgrad: {difficulty}</p>
-        {difficultyImage && <img src={difficultyImage} alt={`${difficulty} level`} />}
+        {difficultyImage && (
+  <img
+    src={difficultyImage}
+    alt={`${difficulty} nivå`}
+    style={{
+      width: '100px',   // Direkt justering av bredden
+      height: '100px',  // Direkt justering av höjden
+      objectFit: 'contain',  // Se till att hela bilden syns inom dessa mått
+    }}
+  />
+)}
+
       </div>
       <Rating onRatingChange={handleRatingChange} />
     </div>

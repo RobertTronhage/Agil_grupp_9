@@ -3,11 +3,22 @@ import { useParams } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
 import Header from "./Header";
 
+// Lägg till påsktemat i bakgrundsobjektet
+const categoryBackgrounds = {
+  halloween: "url('/path/to/halloween-background.jpg')",
+  christmas: "url('/path/to/christmas-background.jpg')",
+  easter: "url(')",  // Använd den uppladdade påskbilden
+  // Lägg till fler kategorier och bilder här
+};
+
 const CategoryPage = () => {
   const { kategori } = useParams();
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Hämta rätt bakgrundsbild baserat på kategori
+  const backgroundImage = categoryBackgrounds[kategori.toLowerCase()] || "none"; // Om ingen bakgrund hittas
 
   useEffect(() => {
     const fetchRecipesByCategory = async () => {
@@ -18,7 +29,6 @@ const CategoryPage = () => {
         }
         const data = await response.json();
 
-        // Filtrera recept baserat på kategori
         const filteredRecipes = data.filter(
           (recipe) =>
             Array.isArray(recipe.categories) &&
@@ -47,7 +57,15 @@ const CategoryPage = () => {
   }
 
   return (
-    <div className="container">
+    <div
+      className="category-page"
+      style={{
+        backgroundImage: backgroundImage,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+      }}
+    >
       <Header />
       <h2>Recept i kategorin: {kategori}</h2>
       <div className="recipes">
