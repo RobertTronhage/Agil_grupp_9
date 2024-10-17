@@ -1,18 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Aside = ({ categories, selectedCategory }) => {
+const CategoryAsideList = ({ categories, selectedCategory }) => {
   return (
-    <aside className="category-list">
+    <aside className="category-list-wrapper">
       <h2>Kategorier</h2>
-      <ul>
-        <li>
+      <ul className='category-list'>
+        <li className='list-item'>
           <Link to="/" className={!selectedCategory ? 'active' : ''}>
             Alla Kategorier
           </Link>
         </li>
         {categories.map((category, index) => (
-          <li key={index}>
+          <li key={index} className='list-item'>
             <Link
               to={`/recept/kategori/${category}`}
               className={selectedCategory === category ? 'active' : ''}>
@@ -25,4 +25,4 @@ const Aside = ({ categories, selectedCategory }) => {
   );
 };
 
-export default Aside;
+export default CategoryAsideList;

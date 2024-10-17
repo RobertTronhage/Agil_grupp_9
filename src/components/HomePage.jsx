@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 import Header from "./Header";
-import Aside from "./Aside";
+import CategoryAsideList from "./Category/CategoryAsideList";
+import CategoryDropDown from "./Category/CategoryDropDown";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -72,9 +73,19 @@ const HomePage = () => {
 
   return (
     <div className="container">
-      <Header searchTerm={searchTerm} onSearchChange={handleSearchChange} />
+      <Header 
+      searchTerm={searchTerm} 
+      onSearchChange={handleSearchChange} 
+      categories={categories} 
+      selectedCategory={selectedCategory} 
+      onCategoryChange={handleCategoryChange}
+      
+      />
       <div className="content-wrapper">
-        <Aside categories={categories} selectedCategory={selectedCategory} />
+        <CategoryAsideList 
+        categories={categories} 
+        selectedCategory={selectedCategory} />
+        
         <div className="recipes">
           {filteredRecipes.map((recipe, index) => (
             <RecipeCard

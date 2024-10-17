@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
 import Header from "./Header";
+import CategoryAsideList from "./Category/CategoryAsideList";
+
 
 // Lägg till påsktemat i bakgrundsobjektet
 const categoryBackgrounds = {
@@ -16,6 +18,8 @@ const CategoryPage = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   // Hämta rätt bakgrundsbild baserat på kategori
   const backgroundImage = categoryBackgrounds[kategori.toLowerCase()] || "none"; // Om ingen bakgrund hittas
@@ -28,6 +32,9 @@ const CategoryPage = () => {
           throw new Error("Något gick fel vid hämtningen av data.");
         }
         const data = await response.json();
+        const allCategories = data.flatMap((recipe) => recipe.categories);
+        const uniqueCategories = [...new Set(allCategories)];
+        setCategories(uniqueCategories);
 
         const filteredRecipes = data.filter(
           (recipe) =>
@@ -48,6 +55,16 @@ const CategoryPage = () => {
     fetchRecipesByCategory();
   }, [kategori]);
 
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    if (category) {
+      navigate(`/recept/kategori/${category}`);
+    } else {
+      setFilteredRecipes(recipes);
+      navigate("/");
+    }
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -66,8 +83,19 @@ const CategoryPage = () => {
         minHeight: "100vh",
       }}
     >
-      <Header />
+      <Header 
+      categories={categories} 
+      selectedCategory={selectedCategory} 
+      onCategoryChange={handleCategoryChange} />
+
+
       <h2>Recept i kategorin: {kategori}</h2>
+
+      <CategoryAsideList 
+      categories={categories} 
+      selectedCategory={selectedCategory} 
+      />
+
       <div className="recipes">
         {recipes.length > 0 ? (
           recipes.map((recipe, index) => (
