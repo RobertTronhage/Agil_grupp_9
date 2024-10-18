@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 import Header from "./Header";
 import CategoryAsideList from "./Category/CategoryAsideList";
-import CategoryDropDown from "./Category/CategoryDropDown";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -41,11 +40,9 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    // Filtrera recept baserat på sökterm
     const filtered = recipes.filter((recipe) => {
       return recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
     });
-
     setFilteredRecipes(filtered);
   }, [searchTerm, recipes]);
 
@@ -72,34 +69,33 @@ const HomePage = () => {
   }
 
   return (
-    <div className="container">
-      <Header 
-      searchTerm={searchTerm} 
-      onSearchChange={handleSearchChange} 
+    <div className="homepage container">
+  <Header 
+    searchTerm={searchTerm} 
+    onSearchChange={handleSearchChange} 
+    categories={categories} 
+    selectedCategory={selectedCategory} 
+    onCategoryChange={handleCategoryChange} 
+  />
+  <div className="content-wrapper">
+    <CategoryAsideList 
       categories={categories} 
       selectedCategory={selectedCategory} 
-      onCategoryChange={handleCategoryChange}
-      
-      />
-      <div className="content-wrapper">
-        <CategoryAsideList 
-        categories={categories} 
-        selectedCategory={selectedCategory} />
-        
-        <div className="recipes">
-          {filteredRecipes.map((recipe, index) => (
-            <RecipeCard
-              key={index}
-              title={recipe.title}
-              imageUrl={recipe.imageUrl}
-              categories={recipe.categories}
-              timeInMins={recipe.timeInMins}
-              id={recipe._id}
-            />
-          ))}
-        </div>
-      </div>
+    />
+    <div className="recipes homepage-recipes">
+      {filteredRecipes.map((recipe, index) => (
+        <RecipeCard
+          key={index}
+          title={recipe.title}
+          imageUrl={recipe.imageUrl}
+          categories={recipe.categories}
+          timeInMins={recipe.timeInMins}
+          id={recipe._id}
+        />
+      ))}
     </div>
+  </div>
+</div>
   );
 };
 
