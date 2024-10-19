@@ -86,7 +86,7 @@ const CategoryPage = () => {
       <Header 
       categories={categories} 
       selectedCategory={selectedCategory} 
-      onCategoryChange={handleCategoryChange} />
+       />
 
 
       <h2>Recept i kategorin: {kategori}</h2>

@@ -78,10 +78,10 @@ const HomePage = () => {
       onSearchChange={handleSearchChange} 
       categories={categories} 
       selectedCategory={selectedCategory} 
-      onCategoryChange={handleCategoryChange}
-      
       />
+
       <div className="content-wrapper">
+        
         <CategoryAsideList 
         categories={categories} 
         selectedCategory={selectedCategory} />
