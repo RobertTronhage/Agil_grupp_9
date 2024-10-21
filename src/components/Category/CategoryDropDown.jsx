@@ -1,21 +1,60 @@
 import React from "react";
+import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef} from "react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-const CategoryDropDown = ({ categories, selectedCategory, onCategoryChange }) => {
+
+const CategoryDropDown = ({ categories, selectedCategory }) => {
+    const [open, setOpen]= useState(false);
+    const close = () => setOpen(false);
+    const dropdownRef =useRef(); 
+
+    useEffect(()=>{
+        const handler = (event) =>{
+            if(dropdownRef.current && !dropdownRef.current.contains(event.target)){
+                setOpen(false);
+            }
+        }
+        document.addEventListener("click", handler);
+        return() =>{
+            document.removeEventListener("click", handler);
+        }
+    },[dropdownRef])
+    
+    const toggleDropdown = () =>{
+        setOpen((open) =>!open); 
+    }
     return (
-      <div className="category-dropdown">
-        <label htmlFor="category-select"></label>
-        <select
-          id="category-select"
-          value={selectedCategory}
-          onChange={(e) => onCategoryChange(e.target.value)}
+      <div className="category-dropdown" ref={dropdownRef}>
+        <div 
+        className={`dropdown-button ${open ? "button-open" : null}`} 
+        onClick={toggleDropdown}
         >
-          <option value="">Alla Kategorier</option>
-          {categories.map((category, index) => (
-            <option key={index} value={category}>
+            Välj Kategori
+            <span className="toggle-icon">
+                {open ? <FaChevronUp/> : <FaChevronDown/>}
+            </span>
+        </div>
+
+
+        <div className={`dropdown-content ${open ? "dropdown-content-open": null} `}>
+        <p>
+            <Link to="/" className={!selectedCategory ? 'active' : ''} onClick={close}>
+             Alla Kategorier
+             </Link>
+        </p>
+         {categories.map((category, index) => (
+          <p key={index} className='list-item'>
+            <Link
+              to={`/recept/kategori/${category}`}
+              className={selectedCategory === category ? 'active' : ''}
+              onClick={close}>
               {category}
-            </option>
-          ))}
-        </select>
+            </Link>
+          </p>
+        ))}
+
+        </div>
       </div>
     );
   };
