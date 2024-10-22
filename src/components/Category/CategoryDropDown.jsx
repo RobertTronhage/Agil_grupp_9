@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect, useRef} from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
@@ -8,6 +8,7 @@ const CategoryDropDown = ({ categories, selectedCategory }) => {
     const [open, setOpen]= useState(false);
     const close = () => setOpen(false);
     const dropdownRef =useRef(); 
+    const {kategori} = useParams();
 
     useEffect(()=>{
         const handler = (event) =>{
@@ -43,11 +44,11 @@ const CategoryDropDown = ({ categories, selectedCategory }) => {
              Alla Kategorier
              </Link>
         </p>
-         {categories.map((category, index) => (
+         {categories.sort().map((category, index) => (
           <p key={index} className='list-item'>
             <Link
               to={`/recept/kategori/${category}`}
-              className={selectedCategory === category ? 'active' : ''}
+              className={kategori === category ? 'active' : ''}
               onClick={close}>
               {category}
             </Link>

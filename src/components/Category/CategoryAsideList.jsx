@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const CategoryAsideList = ({ categories, selectedCategory }) => {
+
+  const {kategori} = useParams();
   return (
     <aside className="category-list-wrapper">
       <h2>Kategorier</h2>
@@ -11,15 +13,15 @@ const CategoryAsideList = ({ categories, selectedCategory }) => {
             Alla Kategorier
           </Link>
         </li>
-        {categories.map((category, index) => (
-          <li key={index} className='list-item'>
+        {categories.sort().map((category, index) => {
+          return <li key={index} className='list-item'>
             <Link
               to={`/recept/kategori/${category}`}
-              className={selectedCategory === category ? 'active' : ''}>
+              className={kategori === category ? 'active' : ''}>
               {category}
             </Link>
           </li>
-        ))}
+})}
       </ul>
     </aside>
   );
