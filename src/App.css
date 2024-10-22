@@ -184,6 +184,12 @@ aside{
   color: var(--darkColor);
   padding: 1rem;
 }
+.active {
+  color: var(--acentColor);
+  font-weight: bold;
+  text-decoration: underline;
+  font-weight: 600;
+}
 
 /* */
 @media only screen and (max-width: 600px) {
@@ -311,10 +317,8 @@ aside{
     color: var(--acentColor);
   }
   
-  .active {
-    color: var(--acentColor);
-    font-weight: bold;
-  }
+
+
   
   /* Layout för startsidan */
 /* Layout för startsidan och kategorisidan är nu densamma */
