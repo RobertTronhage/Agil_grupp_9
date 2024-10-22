@@ -4,13 +4,10 @@ import RecipeCard from "./RecipeCard";
 import Header from "./Header";
 import CategoryAsideList from "./Category/CategoryAsideList";
 
-
-// Lägg till påsktemat i bakgrundsobjektet
 const categoryBackgrounds = {
   halloween: "url('/path/to/halloween-background.jpg')",
   christmas: "url('/path/to/christmas-background.jpg')",
   easter: "url(')",  // Använd den uppladdade påskbilden
-  // Lägg till fler kategorier och bilder här
 };
 
 const CategoryPage = () => {
@@ -21,8 +18,7 @@ const CategoryPage = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  // Hämta rätt bakgrundsbild baserat på kategori
-  const backgroundImage = categoryBackgrounds[kategori.toLowerCase()] || "none"; // Om ingen bakgrund hittas
+  const backgroundImage = categoryBackgrounds[kategori.toLowerCase()] || "none";
 
   useEffect(() => {
     const fetchRecipesByCategory = async () => {
@@ -74,45 +70,36 @@ const CategoryPage = () => {
   }
 
   return (
-    <div
-      className="category-page"
-      style={{
-        backgroundImage: backgroundImage,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        minHeight: "100vh",
-      }}
-    >
-      <Header 
+    <div className="category-page container">
+  <Header 
+    categories={categories} 
+    selectedCategory={selectedCategory} 
+    onCategoryChange={handleCategoryChange} 
+  />
+  <div className="content-wrapper">
+    <CategoryAsideList 
       categories={categories} 
       selectedCategory={selectedCategory} 
-       />
-
-
-      <h2>Recept i kategorin: {kategori}</h2>
-
-      <CategoryAsideList 
-      categories={categories} 
-      selectedCategory={selectedCategory} 
-      />
-
-      <div className="recipes">
-        {recipes.length > 0 ? (
-          recipes.map((recipe, index) => (
-            <RecipeCard
-              key={index}
-              title={recipe.title}
-              imageUrl={recipe.imageUrl}
-              categories={recipe.categories}
-              timeInMins={recipe.timeInMins}
-              id={recipe._id}
-            />
-          ))
-        ) : (
-          <p>Inga recept hittades i denna kategori.</p>
-        )}
-      </div>
+    />
+    <div className="recipes category-recipes">
+      {recipes.length > 0 ? (
+        recipes.map((recipe, index) => (
+          <RecipeCard
+            key={index}
+            title={recipe.title}
+            imageUrl={recipe.imageUrl}
+            categories={recipe.categories}
+            timeInMins={recipe.timeInMins}
+            id={recipe._id}
+          />
+        ))
+      ) : (
+        <p>Inga recept hittades i denna kategori.</p>
+      )}
     </div>
+  </div>
+</div>
+
   );
 };
 
