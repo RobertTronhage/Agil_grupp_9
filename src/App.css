@@ -177,6 +177,13 @@ aside{
   color: var(--acentColor);
 }
 
+input:disabled{
+  background-color: white;
+}
+
+textarea:disabled{
+  background-color: white;
+}
 
 .category-dropdown{
   display: flex;
