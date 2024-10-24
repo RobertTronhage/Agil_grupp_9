@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Rating from './Rating';
+import Rating from './Rating/Rating';
 import enkelImage from "../assets/enkel.png";
 import medelImage from "../assets/medel.png";
 import avanceradImage from "../assets/avancerad.png";
@@ -58,7 +58,7 @@ const RecipeCard = ({ title, imageUrl, categories, timeInMins, id }) => {
 )}
 
       </div>
-      <Rating onRatingChange={handleRatingChange} />
+      <Rating id={id} />
     </div>
   );
 };

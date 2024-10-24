@@ -88,7 +88,6 @@ input.search-input {
 .rating {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
 }
 
 .rating span {
