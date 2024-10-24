@@ -8,7 +8,6 @@ const CommentForm = ({onSubmit}) => {
   
   const handleSubmit = async(e)=>{
     e.preventDefault();
-    onSubmit({name, comment}); 
     setName(""); 
     setComment("");
     setIsSubmitting(true); //inputfält ändrar färg (vit) när det disables

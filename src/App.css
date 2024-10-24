@@ -1,4 +1,4 @@
-:root{
+:root {
   --primaryColor: #A3CCC0;
   --secondaryColor: #6098A4;
   --secondaryAccentColor: #f1ceb8;
@@ -16,7 +16,6 @@ body {
   background-color: var(--lichtColor);
   color: var(--darkColor);
 }
-
 
 .header {
   background-color: var(--primaryColor);
@@ -53,12 +52,12 @@ a:hover {
 
 .container {
   display: flex;
-  flex-direction: column; /* Lägger Header överst */
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
   height: 100vh;
-  
 }
+
 .recipe-card:hover {
   transform: translateY(-5px);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -66,8 +65,8 @@ a:hover {
 
 .recipe-card img {
   width: 100%;
-  height: 200px; /* Fast höjd för bilder */
-  object-fit: cover; /* Skalar och klipper bilden för att fylla behållaren */
+  height: 200px; 
+  object-fit: cover; 
   border-radius: 8px;
   margin-bottom: 10px;
 }
@@ -83,6 +82,12 @@ input.search-input {
   margin-bottom: 20px;
   border-radius: 4px;
   border: 1px solid #ccc;
+}
+
+.search-input {
+  width: 300px; /* Justera bredden till vad du önskar */
+  padding: 8px; /* Minska padding för att göra rutan kompaktare */
+  font-size: 14px; /* Mindre textstorlek om du vill */
 }
 
 .rating {
@@ -102,37 +107,36 @@ input.search-input {
   color: gold;
 }
 
-input{
+input {
   background-color: var(--lichtColor);
   color: var(--primaryDarkColor);
   font-weight: 600;
 }
 
-.icon-text-wrapper{
+.icon-text-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.5rem ;
+  margin-bottom: 1.5rem;
   position: relative;
 }
 
-
-aside{
+aside {
   height: 0;
   padding: 0;
   visibility: hidden;
 }
 
-.category-list{
+.category-list {
   list-style: none;
-
 }
+
 .list-item a, .list-item {
   color: var(--secondaryColor);
   font-weight: 500;
 }
 
-.dropdown-button{
+.dropdown-button {
   display: flex;
   align-items: center;
   width: fit-content;
@@ -140,21 +144,21 @@ aside{
   background-color: var(--acentColor);
   border-radius: 0.5rem;
   cursor: pointer;
-  }
+}
 
-.toggle-icon{
+.toggle-icon {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: 1rem;
 }
 
-.button-open{
-  border: 1px solid var(--border-grey)
+.button-open {
+  border: 1px solid var(--border-grey);
 }
 
-.dropdown-content{
-  position: absolute; 
+.dropdown-content {
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -165,31 +169,31 @@ aside{
   opacity: 0;
 }
 
-.dropdown-content-open{
+.dropdown-content-open {
   opacity: 1;
   pointer-events: all;
 }
 
-
-.list-item:hover{
+.list-item:hover {
   font-weight: bold;
   color: var(--acentColor);
 }
 
-input:disabled{
+input:disabled {
   background-color: white;
 }
 
-textarea:disabled{
+textarea:disabled {
   background-color: white;
 }
 
-.category-dropdown{
+.category-dropdown {
   display: flex;
   justify-content: center;
   color: var(--darkColor);
   padding: 1rem;
 }
+
 .active {
   color: var(--acentColor);
   font-weight: bold;
@@ -197,54 +201,95 @@ textarea:disabled{
   font-weight: 600;
 }
 
-/* */
+/* Receptdetaljsidan */
+.recipe-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.recipe-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.recipe-image {
+  max-width: 40%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.recipe-info {
+  max-width: 55%;
+  margin-left: 20px;
+}
+
+.recipe-instructions {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.recipe-footer {
+  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.rating {
+  margin-top: 10px;
+}
+
+.comment-section {
+  margin-top: 20px;
+}
+
+/* Media Queries */
 @media only screen and (max-width: 600px) {
   .recipes {
     display: grid;
-    grid-template-columns: repeat(1, 1fr); /* Visar alltid tre kolumner */
+    grid-template-columns: repeat(1, 1fr);
     gap: 20px;
     justify-content: center;
     padding: 20px 0px;
   }
-  .icon-text-wrapper{
+  .icon-text-wrapper {
     margin-bottom: 0;
   }
 
-  .header-text{
+  .header-text {
     max-width: 50%;
   }
-  .home-icon{
+
+  .home-icon {
     visibility: hidden;
   }
+}
 
-
-
-
-  
-} 
 @media only screen and (min-width: 600px) {
   .recipes {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Visar alltid tre kolumner */
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     justify-content: center;
     padding: 20px;
   }
- 
-} 
-
+}
 
 @media only screen and (min-width: 768px) {
-  /* Receptsektionen på båda sidor */
-.recipes {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Tre kolumner för recepten */
-  gap: 20px;
-  justify-content: center; /* Centrerar recepten */
-  padding: 20px;
-}
+  .recipes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+
   aside {
-    flex: 0 0 200px; /* Fast bredd för aside */
+    flex: 0 0 200px;
     border: 1px solid var(--border-grey);
     padding: 20px;
     margin: 20px;
@@ -254,38 +299,33 @@ textarea:disabled{
     visibility: visible;
   }
 
-  /* Lägg till denna flexbox-layout för att hantera innehåll och kategorilista */
-.content-wrapper {
-  display: flex; /* Flexbox för att placera kategorilistan och recepten sida vid sida */
-  align-items: flex-start; /* Justera dem till samma höjd */
-  justify-content: space-between; /* Säkerställer att det finns plats mellan dem */
-  margin-left: 220px; /* Gör plats för kategorilistan */
-}
-  
-  .category-dropdown{
+  .content-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-left: 220px;
+  }
+
+  .category-dropdown {
     visibility: hidden;
     display: block;
   }
-  
-} 
+}
 
 @media only screen and (min-width: 992px) {
-  
   .recipes {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Visar alltid tre kolumner */
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     justify-content: center;
     padding: 20px;
   }
-  
-  
 }
+
 @media only screen and (min-width: 1200px) {
-  
   .recipes {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Visar alltid tre kolumner */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     justify-content: center;
     padding: 20px;
@@ -293,7 +333,7 @@ textarea:disabled{
 
   aside.category-list-wrapper {
     position: fixed;
-    top: 300px; /* Justerar avståndet från toppen */
+    top: 300px;
     left: 20px;
     width: 200px;
     height: 100vh;
@@ -301,43 +341,116 @@ textarea:disabled{
     padding: 10px;
     background-color: var(--secondaryAccentColor-transparant);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }  
-  
-  /* Lägger till extra utrymme för innehåll för att undvika överlappning */
-  .content-wrapper {
-    margin-left: 220px; /* Justerar vänstermarginalen så att innehållet inte överlappar kategorilistan */
   }
-  
+
+  .content-wrapper {
+    margin-left: 220px;
+  }
+
   .category-list {
     list-style: none;
   }
-  
+
   .list-item a,
   .list-item {
     color: var(--secondaryColor);
     font-weight: 500;
   }
-  
+
   .list-item:hover {
     font-weight: bold;
     color: var(--acentColor);
   }
-  
-
-
-  
-  /* Layout för startsidan */
-/* Layout för startsidan och kategorisidan är nu densamma */
-.homepage .recipes,
-.category-page .recipes {
-  grid-template-columns: repeat(4, 1fr); /* Fyra kolumner på både startsidan och kategorisidan */
 }
 
+.recipe-detail h2 {
+  margin-top: 20px;
 }
 
+.rating {
+  margin: 10px 0;
+}
 
+.recipe-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  max-width: 800px;
+}
 
+.recipe-header-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
 
+.recipe-header-title h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
 
+.recipe-description {
+  text-align: center;
+  margin-bottom: 20px; /* Lägg till lite utrymme under beskrivningen */
+  font-size: 1.2rem;
+  color: var(--secondaryColor);
+}
 
+.recipe-category {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  color: var(--secondaryColor);
+}
 
+.recipe-category p {
+  margin: 5px 0; /* Justera marginaler mellan kategorin och tiden */
+}
+
+.recipe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Säkerställer att innehållet startar från toppen */
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.recipe-image {
+  max-width: 40%;  /* Styr bildens storlek */
+  height: auto;
+  border-radius: 8px;
+}
+
+.recipe-info {
+  flex-grow: 1;  /* Fyller upp utrymmet bredvid bilden */
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrerar informationen vertikalt om det behövs */
+}
+
+.recipe-instructions {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.recipe-footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.rating {
+  margin-top: 10px;
+}
+
+.comment-section {
+  margin-top: 20px;
+}
+
+.selected-category-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  text-align: center;
+  color: #333;
+}
