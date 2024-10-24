@@ -93,7 +93,9 @@ input.search-input {
 .rating {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+}
+.rating {
+  margin-top: 10px;
 }
 
 .rating span {
@@ -240,15 +242,13 @@ textarea:disabled {
   width: 100%;
 }
 
-.rating {
-  margin-top: 10px;
-}
 
 .comment-section {
   margin-top: 20px;
 }
 
-/* Media Queries */
+/* Media Queries for differnet types of screens */
+/*For phones*/
 @media only screen and (max-width: 600px) {
   .recipes {
     display: grid;
@@ -269,6 +269,7 @@ textarea:disabled {
     visibility: hidden;
   }
 }
+/*For small screens*/
 
 @media only screen and (min-width: 600px) {
   .recipes {
@@ -279,6 +280,8 @@ textarea:disabled {
     padding: 20px;
   }
 }
+
+/* for tablets in vertical mode*/
 
 @media only screen and (min-width: 768px) {
   .recipes {
@@ -312,7 +315,7 @@ textarea:disabled {
     display: block;
   }
 }
-
+/* for tablest in horizontal mode and small computer screens*/
 @media only screen and (min-width: 992px) {
   .recipes {
     display: grid;
@@ -322,6 +325,8 @@ textarea:disabled {
     padding: 20px;
   }
 }
+
+/* Screens bigger than 1200px*/
 
 @media only screen and (min-width: 1200px) {
   .recipes {

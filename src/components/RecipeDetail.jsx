@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import CommentSection from './Comment/CommentSection';
-import Rating from './Rating';
+import Rating from './Rating/Rating';
 import Header from './Header';
 import CategoryAsideList from './Category/CategoryAsideList'; // Importera kategorilistan
 
@@ -41,11 +41,6 @@ const RecipeDetail = () => {
 
     fetchAllCategories();
   }, [id]);
-
-  const handleRatingChange = (newRating) => {
-    setUserRating(newRating);
-    console.log(`Användarens betyg för recept ${id}: ${newRating}`);
-  };
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -116,7 +111,7 @@ const RecipeDetail = () => {
       {/* Rating och kommentarsektion */}
       <div className="recipe-footer">
         <h2>Betygsätt detta recept:</h2>
-        <Rating initialRating={userRating} onRatingChange={handleRatingChange} />
+        <Rating id={id} />
         <CommentSection id={id} />
       </div>
     </div>
