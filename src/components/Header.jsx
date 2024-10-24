@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import homeIcon from '../assets/home_icon.png';
 import CategoryDropDown from './Category/CategoryDropDown';
+import './Header.css'
 
 const Header = ({ searchTerm, onSearchChange, categories, selectedCategory, onCategoryChange }) => {
   return (
