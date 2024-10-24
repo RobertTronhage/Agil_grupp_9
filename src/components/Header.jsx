@@ -4,11 +4,11 @@ import SearchBar from './SearchBar';
 import homeIcon from '../assets/home_icon.png';
 import CategoryDropDown from './Category/CategoryDropDown';
 
-const Header = ({ searchTerm, onSearchChange, categories, selectedCategory, onCategoryChange}) => {
+const Header = ({ searchTerm, onSearchChange, categories, selectedCategory, onCategoryChange }) => {
   return (
     <header className="header" style={{ textAlign: 'center', padding: '20px 0' }}>
       {/* Wrapper för ikonen och texten */}
-      <div className='icon-text-wrapper' >
+      <div className='icon-text-wrapper'>
         {/* Home-ikonen överst till vänster */}
         <Link to="/" style={{ position: 'absolute', left: '20px', top: '0' }}>
           <img src={homeIcon} alt="Home" className="home-icon" style={{ width: '100px', height: 'auto' }} />
@@ -20,21 +20,26 @@ const Header = ({ searchTerm, onSearchChange, categories, selectedCategory, onCa
         </span>
       </div>
 
-      {/* Sökrutan som täcker hela sidan */}
-      <div style={{ maxWidth: '100%', padding: '0 20px' }}>
+      {/* Sökrutan */}
+      <div style={{ maxWidth: '100%', padding: '0 300px' }}>
         <CategoryDropDown 
-        categories={categories} 
-        selectedCategory={selectedCategory} 
-        onCategoryChange={onCategoryChange}/>
-
+          categories={categories} 
+          selectedCategory={selectedCategory} 
+          onCategoryChange={onCategoryChange}
+        />
         <SearchBar
           searchTerm={searchTerm}
           onSearchChange={onSearchChange}
-          style={{ width: '100%' }}  // Sökrutan täcker hela sidan
+          style={{ width: '50px', padding: '8px', fontSize: '14px' }}
         />
-
-
       </div>
+
+      {/* Rubriken för den valda kategorin */}
+      {selectedCategory && (
+        <h2 className="selected-category-title" style={{ marginTop: '20px' }}>
+          {selectedCategory}
+        </h2>
+      )}
     </header>
   );
 };
