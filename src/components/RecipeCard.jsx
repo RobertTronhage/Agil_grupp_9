@@ -30,11 +30,6 @@ const RecipeCard = ({ title, imageUrl, categories, timeInMins, id }) => {
   const difficulty = getDifficulty(timeInMins);
   const difficultyImage = getDifficultyImage(difficulty);
 
-  // Callback-funktion för att hantera när rating ändras
-  const handleRatingChange = (newRating) => {
-    console.log(`Ny rating för ${title}: ${newRating}`);
-  };
-
   return (
     <div className="recipe-card">
       <Link to={`/recept/${id}`}>
