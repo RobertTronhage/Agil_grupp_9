@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './rating.css';
 
 const Rating = ({ id }) => {
   const [rating, setRating] = useState(0);
@@ -70,7 +71,7 @@ const Rating = ({ id }) => {
   return (
     <div>
       <p>Betyg: {rating}/5</p>
-    <div class="rating">
+    <div className="rating">
       {[1, 2, 3, 4, 5].map((value) => (
         <span 
           key={value}

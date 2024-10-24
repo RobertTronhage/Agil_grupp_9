@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
+import './comment.css'
 
 
 const CommentSection = ({id}) =>{
@@ -58,7 +59,7 @@ const CommentSection = ({id}) =>{
         }
     };
     return(
-        <div>
+        <div className="comment-section">
             <h3>Skriv en kommentar</h3>
             <CommentForm onSubmit={handleSubmitComment} />
             {sucessMessage && <p style={{ color: "green" }}>{sucessMessage}</p>}

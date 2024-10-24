@@ -4,6 +4,8 @@ import Rating from './Rating/Rating';
 import enkelImage from "../assets/enkel.png";
 import medelImage from "../assets/medel.png";
 import avanceradImage from "../assets/avancerad.png";
+import './RecipeCard.css'
+
 
 // Funktion som bestämmer svårighetsgraden baserat på tid
 const getDifficulty = (time) => {
