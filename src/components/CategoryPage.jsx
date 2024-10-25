@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import RecipeCard from "./RecipeCard";
 import Header from "./Header";
 import CategoryAsideList from "./Category/CategoryAsideList";
-
-const categoryBackgrounds = {
-  halloween: "url('/path/to/halloween-background.jpg')",
-  christmas: "url('/path/to/christmas-background.jpg')",
-  easter: "url(')",  // Använd den uppladdade påskbilden
-};
+import RecipeCard from "./RecipeCard";
 
 const CategoryPage = () => {
-  const { kategori } = useParams();
+  const { kategori } = useParams();  // Hämta vald kategori från URL:en
   const [recipes, setRecipes] = useState([]);
+  const [categories, setCategories] = useState([]);  // Lägg till state för kategorier
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
-
-  const backgroundImage = categoryBackgrounds[kategori.toLowerCase()] || "none";
 
   useEffect(() => {
     const fetchRecipesByCategory = async () => {
@@ -27,19 +18,18 @@ const CategoryPage = () => {
         if (!response.ok) {
           throw new Error("Något gick fel vid hämtningen av data.");
         }
+
         const data = await response.json();
-        const allCategories = data.flatMap((recipe) => recipe.categories);
-        const uniqueCategories = [...new Set(allCategories)];
-        setCategories(uniqueCategories);
 
-        const filteredRecipes = data.filter(
-          (recipe) =>
-            Array.isArray(recipe.categories) &&
-            recipe.categories.some(
-              (cat) => cat.toLowerCase() === kategori.toLowerCase()
-            )
+        // Extrahera alla kategorier från recepten
+        const allCategories = data.flatMap(recipe => recipe.categories);
+        const uniqueCategories = [...new Set(allCategories)];  // Ta fram unika kategorier
+        setCategories(uniqueCategories);  // Uppdatera kategorier
+
+        // Filtrera recept baserat på vald kategori
+        const filteredRecipes = data.filter((recipe) =>
+          recipe.categories.includes(kategori)
         );
-
         setRecipes(filteredRecipes);
       } catch (error) {
         setError(error.message);
@@ -49,57 +39,50 @@ const CategoryPage = () => {
     };
 
     fetchRecipesByCategory();
-  }, [kategori]);
-
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-    if (category) {
-      navigate(`/recept/kategori/${category}`);
-    } else {
-      setFilteredRecipes(recipes);
-      navigate("/");
-    }
-  };
+  }, [kategori]);  // Uppdatera när kategori i URL ändras
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>Laddar...</p>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p>Fel: {error}</p>;
   }
 
   return (
     <div className="category-page container">
-  <Header 
-    categories={categories} 
-    selectedCategory={selectedCategory} 
-    onCategoryChange={handleCategoryChange} 
-  />
-  <div className="content-wrapper">
-    <CategoryAsideList 
-      categories={categories} 
-      selectedCategory={selectedCategory} 
-    />
-    <div className="recipes category-recipes">
-      {recipes.length > 0 ? (
-        recipes.map((recipe, index) => (
-          <RecipeCard
-            key={index}
-            title={recipe.title}
-            imageUrl={recipe.imageUrl}
-            categories={recipe.categories}
-            timeInMins={recipe.timeInMins}
-            id={recipe._id}
-          />
-        ))
-      ) : (
-        <p>Inga recept hittades i denna kategori.</p>
-      )}
-    </div>
-  </div>
-</div>
+      {/* Passar kategorier och vald kategori till Header */}
+      <Header 
+        searchTerm="" 
+        onSearchChange={() => {}} 
+        categories={categories}  // Skicka alla kategorier
+        selectedCategory={kategori}  // Skicka den valda kategorin
+      />
 
+      <div className="content-wrapper">
+        {/* Passar kategorier till CategoryAsideList så att de alltid visas */}
+        <CategoryAsideList 
+          categories={categories}  // Skicka alla kategorier
+          selectedCategory={kategori}  // Skicka den valda kategorin
+        />
+
+        <div className="recipes category-recipes">
+          {recipes.length > 0 ? (
+            recipes.map((recipe, index) => (
+              <RecipeCard key={index}
+              title={recipe.title}
+              imageUrl={recipe.imageUrl}
+              categories={recipe.categories}
+              timeInMins={recipe.timeInMins}
+              id={recipe._id}
+              />
+            ))
+          ) : (
+            <p>Inga recept hittades i denna kategori.</p>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,14 +1,24 @@
 import React, { useState } from "react";
+import './comment.css';
+
 
 const CommentForm = ({onSubmit}) => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const handleSubmit = (e)=>{
+  const handleSubmit = async(e)=>{
     e.preventDefault();
-    onSubmit({name, comment}); 
     setName(""); 
     setComment("");
+    setIsSubmitting(true); //inputfält ändrar färg (vit) när det disables
+  
+    await onSubmit({ name, comment }); // Skicka in kommentaren till CommentSection via props
+    setName("");   // Töm input-fältet
+    setComment(""); // Töm input-fältet
+    setIsSubmitting(false); // Återaktivera input-fälten
+
+       
   }; 
   
   return(
@@ -18,7 +28,9 @@ const CommentForm = ({onSubmit}) => {
         <input type="text" 
         id="name" value={name} 
         onChange={(e) => setName(e.target.value)} 
-        required />
+        disabled={isSubmitting}
+        required 
+      />
       </div>
 
       <div>
@@ -27,10 +39,13 @@ const CommentForm = ({onSubmit}) => {
         id="comment"
         value={comment}
         onChange={(e)=> setComment(e.target.value)}
+        disabled={isSubmitting}
         required
         ></textarea>
       </div>
-      <button type="submit">Skicka kommentar</button>
+      <button id="submit-button" type="submit"
+      disabled={isSubmitting}
+      >Skicka kommentar</button>
     </form>
   );
 };

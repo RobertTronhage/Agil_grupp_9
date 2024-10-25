@@ -1,0 +1,26 @@
+input {
+    background-color: var(--lichtColor);
+    color: var(--primaryDarkColor);
+    font-weight: 600;
+  }
+  .comment-section {
+    margin-top: 20px;
+    background-color: var(--secondaryAccentColor-transparant);
+  }
+  textarea{
+    background-color: var(--lichtColor);
+    color: var(--primaryDarkColor);
+    font-weight: 600;
+  }
+  button{
+    background-color: var(--acentColor);
+    color: var(--primaryDarkColor);
+  }
+  input:disabled {
+    background-color: white;
+  }
+  
+  textarea:disabled {
+    background-color: white;
+  }
+  

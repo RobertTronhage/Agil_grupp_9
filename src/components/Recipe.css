@@ -1,0 +1,36 @@
+.recipe-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    max-width: 800px;
+  }
+  
+  .recipe-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .recipe-image {
+    max-width: 40%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .recipe-info {
+    max-width: 55%;
+    margin-left: 20px;
+  }
+  
+  .recipe-instructions {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .recipe-footer {
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+  }

@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect, useRef} from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-
+import './category.css';
 
 const CategoryDropDown = ({ categories, selectedCategory }) => {
     const [open, setOpen]= useState(false);

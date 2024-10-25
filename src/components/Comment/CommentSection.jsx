@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
+import './comment.css'
 
 
 const CommentSection = ({id}) =>{
     const[comments, setComments] = useState([]); 
     const[error, setError] = useState("");
     const [sucessMessage, setSuccessMessage] = useState("");
-    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() =>{
         const fetchComments = async () =>{
@@ -44,7 +44,7 @@ const CommentSection = ({id}) =>{
         );
         if(response.ok){
             const savedComment = await response.json();
-            setComments([savedComment,...comments]); 
+            setComments([...comments,savedComment,]); 
             setError("");
             setSuccessMessage("Tack för din kommentar!");
 
@@ -53,15 +53,13 @@ const CommentSection = ({id}) =>{
             }, 3000);
         } else{
             setError("Kunde inte spara kommentaren. Försök igen");
-            setIsSubmitting(false);
         }
         } catch (error){
             setError("Ett fel inträffade när kommentaren skulle skickas.");
-            setIsSubmitting(false);
         }
     };
     return(
-        <div>
+        <div className="comment-section">
             <h3>Skriv en kommentar</h3>
             <CommentForm onSubmit={handleSubmitComment} />
             {sucessMessage && <p style={{ color: "green" }}>{sucessMessage}</p>}

@@ -4,6 +4,7 @@ import Header from "./Header";
 import CategoryAsideList from "./Category/CategoryAsideList";
 import { useNavigate } from "react-router-dom";
 
+
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -78,7 +79,7 @@ const HomePage = () => {
     onCategoryChange={handleCategoryChange} 
   />
   <div className="content-wrapper">
-    <CategoryAsideList 
+    <CategoryAsideList
       categories={categories} 
       selectedCategory={selectedCategory} 
     />

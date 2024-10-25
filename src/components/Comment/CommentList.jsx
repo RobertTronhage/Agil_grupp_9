@@ -1,16 +1,17 @@
 import React from "react";
 
 function CommentList({ comments }){
-    const commentListItem = comments.map((comments, index) => {
-        const date = new Date(comments.createdAt); 
+    const reverseComments = [...comments].reverse();
+    const commentListItem = reverseComments.map((reverseComments, index) => {
+        const date = new Date(reverseComments.createdAt); 
         const formattedDate = date.toLocaleDateString();
 
         return(        
         <div key={index}>
             <h4>  
-                {formattedDate}  skrev: {comments.name} 
+                {formattedDate}  skrev: {reverseComments.name} 
             </h4>
-            <p>{comments.comment}</p>
+            <p>{reverseComments.comment}</p>
         </div> 
         );
 }); 
