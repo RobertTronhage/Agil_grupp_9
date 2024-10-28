@@ -1,24 +1,20 @@
-.rating {
+.star {
     display: flex;
     justify-content: center;
   }
   .rating {
-    margin-top: 10px;
+    margin-top: auto;
+    padding-top: 1rem;
   }
   
-  .rating span {
-    font-size: 24px;
+  .star span {
+    font-size: 1.5rem;
     cursor: pointer;
     color: lightgray;
     transition: color 0.2s;
   }
   
-  .rating span:hover,
-  .rating span:hover ~ span {
+  .star span:hover,
+  .star span:hover ~ span {
     color: gold;
   }
-  .rating {
-    margin: 10px 0;
-  }
-  
-  
