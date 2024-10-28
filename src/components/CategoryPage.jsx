@@ -68,8 +68,14 @@ const CategoryPage = () => {
 
         <div className="recipes category-recipes">
           {recipes.length > 0 ? (
-            recipes.map((recipe) => (
-              <RecipeCard key={recipe._id} {...recipe} />
+            recipes.map((recipe, index) => (
+              <RecipeCard key={index}
+              title={recipe.title}
+              imageUrl={recipe.imageUrl}
+              categories={recipe.categories}
+              timeInMins={recipe.timeInMins}
+              id={recipe._id}
+              />
             ))
           ) : (
             <p>Inga recept hittades i denna kategori.</p>

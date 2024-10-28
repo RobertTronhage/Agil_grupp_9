@@ -1,0 +1,20 @@
+.star {
+    display: flex;
+    justify-content: center;
+  }
+  .rating {
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+  
+  .star span {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: lightgray;
+    transition: color 0.2s;
+  }
+  
+  .star span:hover,
+  .star span:hover ~ span {
+    color: gold;
+  }

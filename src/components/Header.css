@@ -1,0 +1,43 @@
+:root {
+    --primaryColor: #A3CCC0;
+    --secondaryColor: #6098A4;
+    --secondaryAccentColor: #f1ceb8;
+    --secondaryAccentColor-transparant: #f1ceb84D;
+    --lichtColor: #fcfaf4;
+    --acentColor: #F4C6B4; 
+    --darkColor: #043444;
+    --secondaryDarkColor: #2C4E5C; 
+    --border-grey : #ddd; 
+  }
+
+  
+.header {
+    background-color: var(--primaryColor);
+    color: var(--darkColor);
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1;
+  }
+
+  .icon-text-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .icon-text-wrapper {
+        margin-bottom: 0;
+      }
+    
+      .header-text {
+        max-width: 50%;
+      }
+    
+      .home-icon {
+        visibility: hidden;
+      }
+  }

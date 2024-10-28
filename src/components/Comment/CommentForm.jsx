@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './comment.css';
 
 
 const CommentForm = ({onSubmit}) => {
@@ -42,7 +43,7 @@ const CommentForm = ({onSubmit}) => {
         required
         ></textarea>
       </div>
-      <button type="submit"
+      <button id="submit-button" type="submit"
       disabled={isSubmitting}
       >Skicka kommentar</button>
     </form>

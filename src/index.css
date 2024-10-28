@@ -60,7 +60,6 @@ button:focus-visible {
   text-align: center;
   width: 100%;
 }
-
 #root {
   display: flex;
   flex-direction: column;

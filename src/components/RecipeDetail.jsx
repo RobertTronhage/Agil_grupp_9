@@ -4,6 +4,8 @@ import CommentSection from './Comment/CommentSection';
 import Rating from './Rating/Rating';
 import Header from './Header';
 import CategoryAsideList from './Category/CategoryAsideList'; // Importera kategorilistan
+import './Recipe.css';
+
 
 const RecipeDetail = () => {
   const { id } = useParams();
