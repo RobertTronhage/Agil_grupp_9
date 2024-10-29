@@ -69,9 +69,9 @@ const Rating = ({ id }) => {
     return <p>Laddar betyg...</p>;
   }
   return (
-    <div>
+    <div className='rating'>
       <p>Betyg: {rating}/5</p>
-    <div className="rating">
+    <div className="star">
       {[1, 2, 3, 4, 5].map((value) => (
         <span 
           key={value}

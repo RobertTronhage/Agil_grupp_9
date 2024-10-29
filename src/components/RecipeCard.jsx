@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Rating from './Rating/Rating';
-import enkelImage from "../assets/enkel.png";
-import medelImage from "../assets/medel.png";
-import avanceradImage from "../assets/avancerad.png";
+import { FaRegClock } from "react-icons/fa6";
+import enkelImage from "../assets/enkel-dark-background.png";
+import medelImage from "../assets/medel-dark-background.png";
+import avanceradImage from "../assets/avancerad-dark-background.png";
+
 import './RecipeCard.css'
 
 
@@ -28,6 +30,8 @@ const getDifficultyImage = (difficulty) => {
   }
 };
 
+
+
 const RecipeCard = ({ title, imageUrl, categories, timeInMins, id }) => {
   const difficulty = getDifficulty(timeInMins);
   const difficultyImage = getDifficultyImage(difficulty);
@@ -35,25 +39,22 @@ const RecipeCard = ({ title, imageUrl, categories, timeInMins, id }) => {
   return (
     <div className="recipe-card">
       <Link to={`/recept/${id}`}>
-        <img src={imageUrl || 'default-image-url.jpg'} alt={title || 'Recept'} />
+        <img className='recipe-card-img' src={imageUrl || 'default-image-url.jpg'} alt={title || 'Recept'} />
       </Link>
       <div className="recipe-card-content">
         <h2>{title || 'Recept utan namn'}</h2>
         <p>Kategori: {categories ? categories.join(', ') : 'Okänd kategori'}</p>
-        <p>Tid: {timeInMins ? `${timeInMins} minuter` : 'Okänd tid'}</p>
-        <p>Svårighetsgrad: {difficulty}</p>
+       
+       <div className='recipe-card-props'>
+        <p><FaRegClock /> {timeInMins ? `${timeInMins} minuter` : 'Okänd tid'} </p>
         {difficultyImage && (
-  <img
+  <img id='dificulty-icon'
     src={difficultyImage}
     alt={`${difficulty} nivå`}
-    style={{
-      width: '100px',   // Direkt justering av bredden
-      height: '100px',  // Direkt justering av höjden
-      objectFit: 'contain',  // Se till att hela bilden syns inom dessa mått
-    }}
   />
 )}
 
+       </div>
       </div>
       <Rating id={id} />
     </div>
