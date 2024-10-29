@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
 import Header from "./Header";
 import CategoryAsideList from "./Category/CategoryAsideList";
+import Footer from "./Footer/Footer";
 import { useNavigate } from "react-router-dom";
-
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
@@ -71,32 +71,35 @@ const HomePage = () => {
 
   return (
     <div className="homepage container">
-  <Header 
-    searchTerm={searchTerm} 
-    onSearchChange={handleSearchChange} 
-    categories={categories} 
-    selectedCategory={selectedCategory} 
-    onCategoryChange={handleCategoryChange} 
-  />
-  <div className="content-wrapper">
-    <CategoryAsideList
-      categories={categories} 
-      selectedCategory={selectedCategory} 
-    />
-    <div className="recipes homepage-recipes">
-      {filteredRecipes.map((recipe, index) => (
-        <RecipeCard
-          key={index}
-          title={recipe.title}
-          imageUrl={recipe.imageUrl}
-          categories={recipe.categories}
-          timeInMins={recipe.timeInMins}
-          id={recipe._id}
+      <Header
+        searchTerm={searchTerm}
+        onSearchChange={handleSearchChange}
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryChange={handleCategoryChange}
+      />
+      <div className="content-wrapper">
+        <CategoryAsideList
+          categories={categories}
+          selectedCategory={selectedCategory}
         />
-      ))}
+        <div className="recipes homepage-recipes">
+          {filteredRecipes.map((recipe, index) => (
+            <RecipeCard
+              key={index}
+              title={recipe.title}
+              imageUrl={recipe.imageUrl}
+              categories={recipe.categories}
+              timeInMins={recipe.timeInMins}
+              id={recipe._id}
+            />
+          ))}
+        </div>
+        <div className="footer">
+          <Footer />
+        </div>
+      </div>
     </div>
-  </div>
-</div>
   );
 };
 
