@@ -51,39 +51,43 @@ const CategoryPage = () => {
 
   return (
     <div className="category-page container">
-      {/* Passar kategorier och vald kategori till Header */}
       <Header 
         searchTerm="" 
         onSearchChange={() => {}} 
-        categories={categories}  // Skicka alla kategorier
-        selectedCategory={kategori}  // Skicka den valda kategorin
+        categories={categories} 
+        selectedCategory={kategori}
       />
-
+  
       <div className="content-wrapper">
-        {/* Passar kategorier till CategoryAsideList så att de alltid visas */}
         <CategoryAsideList 
-          categories={categories}  // Skicka alla kategorier
-          selectedCategory={kategori}  // Skicka den valda kategorin
+          categories={categories}
+          selectedCategory={kategori}
         />
-
-        <div className="recipes category-recipes">
-          {recipes.length > 0 ? (
-            recipes.map((recipe, index) => (
-              <RecipeCard key={index}
-              title={recipe.title}
-              imageUrl={recipe.imageUrl}
-              categories={recipe.categories}
-              timeInMins={recipe.timeInMins}
-              id={recipe._id}
-              />
-            ))
-          ) : (
-            <p>Inga recept hittades i denna kategori.</p>
-          )}
+  
+        {/* Centrera vald kategori ovanför recepten */}
+        <div className="recipes-section">
+          <div className="selected-category-text">
+            <h2>Kategori: {kategori}</h2>
+          </div>
+          <div className="recipes category-recipes">
+            {recipes.length > 0 ? (
+              recipes.map((recipe, index) => (
+                <RecipeCard key={index}
+                  title={recipe.title}
+                  imageUrl={recipe.imageUrl}
+                  categories={recipe.categories}
+                  timeInMins={recipe.timeInMins}
+                  id={recipe._id}
+                />
+              ))
+            ) : (
+              <p>Inga recept hittades i denna kategori.</p>
+            )}
+          </div>
         </div>
       </div>
     </div>
-  );
+  );    
 };
 
 export default CategoryPage;

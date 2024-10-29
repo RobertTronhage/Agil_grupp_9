@@ -316,9 +316,21 @@ Receptdetaljsidan */
 }
 
 .selected-category-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-top: 20px;
-  text-align: center;
-  color: #333;
+  display: none;
 }
+
+.selected-category-text {
+  margin-bottom: 10px; /* Justera avståndet från rubriken till recepten */
+  font-size: 1.5rem;
+  color: var(--darkColor);
+  text-align: center;
+  width: 100%;
+}
+
+.recipes-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Ser till att texten och recepten är centrerade */
+  width: 100%;
+}
+
