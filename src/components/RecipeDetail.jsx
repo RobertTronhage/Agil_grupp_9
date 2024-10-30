@@ -145,7 +145,7 @@ const RecipeDetail = () => {
 
 
       {/* Rating och kommentarsektion */}
-      <div className="recipe-footer">
+      <div className="recipe-comments-container">
         <CommentSection id={id} />
       </div>
       <div className="footer">

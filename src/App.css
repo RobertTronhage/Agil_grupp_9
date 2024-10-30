@@ -172,6 +172,15 @@ display: flex;
   margin-top: 2.5rem;
 }
 
+.recipe-comments-container{
+  max-width: 800px;
+  min-width: 800px;
+  background-color: var(--secondaryAccentColor-transparant);
+  border: 0px solid var(--border-grey);
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
 
 .recipe-description {
   text-align: center;
