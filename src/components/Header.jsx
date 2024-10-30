@@ -37,10 +37,11 @@ const Header = ({ searchTerm, onSearchChange, categories, selectedCategory, onCa
 
       {/* Rubriken för den valda kategorin */}
       {selectedCategory && (
-        <h2 className="selected-category-title" style={{ marginTop: '20px' }}>
-          {selectedCategory}
-        </h2>
-      )}
+  <h2 className="selected-category-title">
+    {selectedCategory}
+  </h2>
+)}
+
     </header>
   );
 };
