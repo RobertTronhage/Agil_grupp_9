@@ -5,7 +5,6 @@ const Rating = ({ id }) => {
   const [rating, setRating] = useState(0);
   const [isLoading, setIsLoading] = useState(true); 
   const [isSubmitting, setIsSubmitting]= useState(false); 
-  const [hoverRating, setHoverRating] = useState(0);
   const [message, setMessage] = useState(''); 
 
   const roundToOneDecimal = (num) => Number(num.toFixed(1));

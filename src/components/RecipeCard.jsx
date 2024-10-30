@@ -7,6 +7,7 @@ import medelImage from "../assets/medel-dark-background.png";
 import avanceradImage from "../assets/avancerad-dark-background.png";
 
 import './RecipeCard.css'
+import RatingDisplay from './Rating/RatingDisplay';
 
 
 // Funktion som bestämmer svårighetsgraden baserat på tid

@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import CommentSection from "./Comment/CommentSection";
-import Rating from "./Rating/Rating";
-import Header from "./Header";
-import CategoryAsideList from "./Category/CategoryAsideList"; // Importera kategorilistan
-import "./Recipe.css";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import CommentSection from './Comment/CommentSection';
+import Rating from './Rating/Rating';
+import RatingDisplay from './Rating/RatingDisplay';
+import Header from './Header';
+import { FaRegClock } from "react-icons/fa6";
+import CategoryAsideList from './Category/CategoryAsideList'; // Importera kategorilistan
 import Footer from "./Footer/Footer";
+
 
 const RecipeDetail = () => {
   const { id } = useParams();
@@ -16,7 +18,9 @@ const RecipeDetail = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [categories, setCategories] = useState([]); // Här hanterar vi kategorier
   const [selectedCategory, setSelectedCategory] = useState("");
-
+  const [ingredientCount, setIngredientCount] = useState(0);
+  
+  
   useEffect(() => {
     const fetchAllCategories = async () => {
       try {
@@ -25,7 +29,7 @@ const RecipeDetail = () => {
           throw new Error("Något gick fel vid hämtningen av recepten.");
         }
         const data = await response.json();
-
+        
         // Extrahera alla kategorier från alla recept
         const allCategories = data.flatMap((recipe) => recipe.categories);
         const uniqueCategories = [...new Set(allCategories)]; // Skapa en lista med unika kategorier
@@ -40,26 +44,34 @@ const RecipeDetail = () => {
         setLoading(false);
       }
     };
-
+    
     fetchAllCategories();
   }, [id]);
-
+  
+  const getDifficulty = (time) => {
+    if (time < 30) return 'Enkel';   // Enkel
+    if (time >= 30 && time <= 60) return 'Medel';  // Medel
+    return 'Avancerad';  // Avancerad
+  };
+  
+  
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
-
+  
   if (loading) {
     return <p>Laddar...</p>;
   }
-
+  
   if (error) {
     return <p>Fel: {error}</p>;
   }
-
+  
   if (!recipe) {
     return <p>Receptet hittades inte.</p>;
   }
-
+  const difficulty = getDifficulty(recipe.timeInMins);
+  
   return (
     <div className="recipe-detail">
       {/* Header med sökruta och ikon */}
@@ -78,30 +90,51 @@ const RecipeDetail = () => {
         onCategoryChange={handleCategoryChange}
       />
 
-      {/* Titel och beskrivning */}
-      <div className="recipe-header-title">
+
+      {/* Titel, beskrivning och bild*/}
+      <div className='recipe-header-containter'>
+        <div className='recipe-header'>
+
+      <div className="recipe-title">
         <h1>{recipe.title}</h1>
+
+        <RatingDisplay id={id} />
+      </div>
+      <div className='recipe-header-props'>
+        <p>
+        <FaRegClock /> {recipe.timeInMins} min. </p>
+        <p> {recipe.ingredients.length} ingredienser</p>
+        <p>{difficulty}</p>
       </div>
       <div className="recipe-description">
+        <p id='categories'>Kategorier: {recipe.categories.join(", ")}</p>
         <p>{recipe.description}</p>
       </div>
-
-      {/* Kategori och baktid */}
-      <div className="recipe-category">
-        <p>Kategorier: {recipe.categories.join(", ")}</p>
-        <p>Tid att baka: {recipe.timeInMins} minuter</p>
-      </div>
-
-      {/* Bild och receptdetaljer */}
-      <div className="recipe-header">
-        <img
+        </div>
+      <div className='recipe-img-container'>
+      <img
           src={recipe.imageUrl}
           alt={recipe.title}
           className="recipe-image"
         />
+      </div>
+
+      </div>
+
+      {/* Ingredienser och receptdetaljer */}
+      <div className="recipe-details-container">
         <div className="recipe-info">
           <p>{recipe.description}</p>
         </div>
+      </div>
+
+      <div>
+        <h2>Ingredienser</h2>
+        <ul>
+          {recipe.ingredients.map((ingredient, index)=>(
+          <li key={index}> {ingredient.amount} {ingredient.unit} {ingredient.name}</li>
+          ))}
+        </ul>
       </div>
 
       {/* Instruktioner */}
