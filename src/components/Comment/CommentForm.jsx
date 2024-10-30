@@ -23,9 +23,9 @@ const CommentForm = ({onSubmit}) => {
   
   return(
     <form onSubmit={handleSubmit}>
-      <div className="name-input">
+      <div>
+        <label htmlFor="name">Namn:</label>
         <input type="text" 
-        placeholder="Namn"
         id="name" value={name} 
         onChange={(e) => setName(e.target.value)} 
         disabled={isSubmitting}
@@ -33,9 +33,9 @@ const CommentForm = ({onSubmit}) => {
       />
       </div>
 
-      <div className="comment-input">
+      <div>
+        <label htmlFor="comment">Kommentar:</label>
         <textarea
-        placeholder="Skriv din kommentar"
         id="comment"
         value={comment}
         onChange={(e)=> setComment(e.target.value)}

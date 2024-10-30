@@ -96,7 +96,7 @@ display: flex;
   border: 1px solid var(--border-grey);
   border-radius: 8px;
   margin-top: 2rem;
-  max-width: 800px; /* Max width of the container (can be set bigger)*/
+  max-width: 800px;
 }
 
 .recipe-title{
@@ -123,64 +123,41 @@ display: flex;
 
 }
 
-.recipe-details-container {
-  display: grid;
-  grid-template-columns: auto auto;
-  margin-top: 2rem;
-  max-width: 800px; /* Max width of the container (can be set bigger)*/
-}
-
-.recipe-ingredients{
-  padding: 0.5rem 2rem;
-  border: 1px solid var(--border-grey);
-  border-radius: 8px;
-  margin: 0 1rem;
-}
-
-.recipe-ingredients ul{
-  list-style-type: none
-}
-
-.recipe-ingredients ul li{
-  border: 1px solid var(--border-grey);
-  padding: 0.5rem;
-  margin: 0.5rem 0rem;
-}
-
-.recipe-ingredients ul li span{
-  font-weight: 700;
+.recipe-info {
+  max-width: 55%;
+  margin-left: 20px;
 }
 
 .recipe-instructions {
-  padding: 0.5rem 2rem;
-  border: 1px solid var(--border-grey);
-  border-radius: 8px;
-  margin: 0 1rem;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.recipe-footer {
   text-align: center;
-}
-.recipe-instructions ol{
-  list-style-position: inside;
-}
-
-.recipe-instructions ol li{
-  border: 1px solid var(--border-grey);
-  padding: 0.5rem;
-  margin: 0.5rem 0rem;
+  margin-top: 20px;
+  width: 100%;
 }
 
-.recipe-instructions h4{
-  margin-top: 2.5rem;
+
+.category-list-wrapper {
+  height: 0;
+  padding: 0;
+  visibility: hidden;
+}
+.recipe-detail h2 {
+  margin-top: 20px;
 }
 
-.recipe-comments-container{
-  max-width: 800px;
-  min-width: 800px;
-  background-color: var(--secondaryAccentColor-transparant);
-  border: 0px solid var(--border-grey);
-  border-radius: 8px;
-  margin-top: 2rem;
+.recipe-header-title {
+  text-align: center;
+  margin-bottom: 10px;
 }
 
+.recipe-header-title h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
 
 .recipe-description {
   text-align: center;
@@ -197,6 +174,19 @@ display: flex;
   margin: 5px 0; /* Justera marginaler mellan kategorin och tiden */
 }
 
+.recipe-info {
+  flex-grow: 1;  /* Fyller upp utrymmet bredvid bilden */
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrerar informationen vertikalt om det behövs */
+}
+
+.recipe-instructions {
+  width: 100%;
+  margin-top: 20px;
+}
+
 .recipe-footer {
   text-align: center;
   margin-top: 20px;
@@ -210,11 +200,6 @@ display: flex;
   color: #333;
 }
 
-.category-list-wrapper {
-  height: 0;
-  padding: 0;
-  visibility: hidden;
-}
 
 
 /* Media Queries for differnet types of screens */
