@@ -3,11 +3,12 @@ import { useParams } from "react-router-dom";
 import Header from "./Header";
 import CategoryAsideList from "./Category/CategoryAsideList";
 import RecipeCard from "./RecipeCard";
+import Footer from "./Footer/Footer";
 
 const CategoryPage = () => {
-  const { kategori } = useParams();  // Hämta vald kategori från URL:en
+  const { kategori } = useParams(); // Hämta vald kategori från URL:en
   const [recipes, setRecipes] = useState([]);
-  const [categories, setCategories] = useState([]);  // Lägg till state för kategorier
+  const [categories, setCategories] = useState([]); // Lägg till state för kategorier
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -22,9 +23,9 @@ const CategoryPage = () => {
         const data = await response.json();
 
         // Extrahera alla kategorier från recepten
-        const allCategories = data.flatMap(recipe => recipe.categories);
-        const uniqueCategories = [...new Set(allCategories)];  // Ta fram unika kategorier
-        setCategories(uniqueCategories);  // Uppdatera kategorier
+        const allCategories = data.flatMap((recipe) => recipe.categories);
+        const uniqueCategories = [...new Set(allCategories)]; // Ta fram unika kategorier
+        setCategories(uniqueCategories); // Uppdatera kategorier
 
         // Filtrera recept baserat på vald kategori
         const filteredRecipes = data.filter((recipe) =>
@@ -39,7 +40,7 @@ const CategoryPage = () => {
     };
 
     fetchRecipesByCategory();
-  }, [kategori]);  // Uppdatera när kategori i URL ändras
+  }, [kategori]); // Uppdatera när kategori i URL ändras
 
   if (loading) {
     return <p>Laddar...</p>;
@@ -84,6 +85,9 @@ const CategoryPage = () => {
               <p>Inga recept hittades i denna kategori.</p>
             )}
           </div>
+        </div>
+        <div className="footer">
+          <Footer />
         </div>
       </div>
     </div>
