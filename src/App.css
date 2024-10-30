@@ -79,27 +79,48 @@ header {
   position: relative;
 }
 
+
+
 /*
 Receptdetaljsidan */
 .recipe-detail {
-  display: flex;
+display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px auto;
+}
+
+.recipe-header-containter {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 1.5rem;
+  border: 1px solid var(--border-grey);
+  border-radius: 8px;
+  margin-top: 2rem;
   max-width: 800px;
 }
 
-.recipe-header {
+.recipe-title{
+  text-align: center;
+}
+
+.recipe-header-props{
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  width: 100%;
+  border: 1px solid var(--border-grey);
+  border-radius: 8px;
+  justify-content: space-around;
+  padding: 0.3rem;
+  
+}
+
+.recipe-img-container{
+  padding: 1rem;
 }
 
 .recipe-image {
-  max-width: 40%;
-  height: auto;
+  max-width: 400px;
   border-radius: 8px;
+  object-fit: contain;
+
 }
 
 .recipe-info {
@@ -124,6 +145,63 @@ Receptdetaljsidan */
   padding: 0;
   visibility: hidden;
 }
+.recipe-detail h2 {
+  margin-top: 20px;
+}
+
+.recipe-header-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.recipe-header-title h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.recipe-description {
+  text-align: center;
+  margin-bottom: 20px; /* Lägg till lite utrymme under beskrivningen */
+  font-size: 1.2rem;
+  color: var(--secondaryColor);
+}
+
+#categories{
+  color: var(--darkColor);
+}
+
+.recipe-description p {
+  margin: 5px 0; /* Justera marginaler mellan kategorin och tiden */
+}
+
+.recipe-info {
+  flex-grow: 1;  /* Fyller upp utrymmet bredvid bilden */
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrerar informationen vertikalt om det behövs */
+}
+
+.recipe-instructions {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.recipe-footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.selected-category-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  text-align: center;
+  color: #333;
+}
+
+
+
 /* Media Queries for differnet types of screens */
 
 /*For phones*/
@@ -242,83 +320,3 @@ Receptdetaljsidan */
   }
 }
 
-.recipe-detail h2 {
-  margin-top: 20px;
-}
-
-
-.recipe-detail {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px auto;
-  max-width: 800px;
-}
-
-.recipe-header-title {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.recipe-header-title h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.recipe-description {
-  text-align: center;
-  margin-bottom: 20px; /* Lägg till lite utrymme under beskrivningen */
-  font-size: 1.2rem;
-  color: var(--secondaryColor);
-}
-
-.recipe-category {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.2rem;
-  color: var(--secondaryColor);
-}
-
-.recipe-category p {
-  margin: 5px 0; /* Justera marginaler mellan kategorin och tiden */
-}
-
-.recipe-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start; /* Säkerställer att innehållet startar från toppen */
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.recipe-image {
-  max-width: 40%;  /* Styr bildens storlek */
-  height: auto;
-  border-radius: 8px;
-}
-
-.recipe-info {
-  flex-grow: 1;  /* Fyller upp utrymmet bredvid bilden */
-  margin-left: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centrerar informationen vertikalt om det behövs */
-}
-
-.recipe-instructions {
-  width: 100%;
-  margin-top: 20px;
-}
-
-.recipe-footer {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.selected-category-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-top: 20px;
-  text-align: center;
-  color: #333;
-}
