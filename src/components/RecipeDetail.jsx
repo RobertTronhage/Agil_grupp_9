@@ -118,34 +118,39 @@ const RecipeDetail = () => {
           className="recipe-image"
         />
       </div>
+
       </div>
 
-      {/* Ingredienser och instruktioner */}
+      {/* Ingredienser och receptdetaljer */}
       <div className="recipe-details-container">
-        <div className='recipe-ingredients'>
-          <h2>Ingredienser</h2>
-          <ul>
-            {recipe.ingredients.map((ingredient, index)=>(
-            <li key={index}> <span>{ingredient.amount}</span> {ingredient.unit} {ingredient.name}</li>
-            ))}
-          </ul>
-        </div>
-        
-        <div className="recipe-instructions">
-          <h2>Instruktioner:</h2>
-          <ol>
-            {recipe.instructions.map((instruction, index) => (
-            <li key={index}>{instruction}</li>
-            ))}
-          </ol>
-          <h4>Vad tyckte du om receptet?</h4>
-          <Rating id={id} />
+        <div className="recipe-info">
+          <p>{recipe.description}</p>
         </div>
       </div>
 
+      <div>
+        <h2>Ingredienser</h2>
+        <ul>
+          {recipe.ingredients.map((ingredient, index)=>(
+          <li key={index}> {ingredient.amount} {ingredient.unit} {ingredient.name}</li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Instruktioner */}
+      <div className="recipe-instructions">
+        <h2>Instruktioner:</h2>
+        <ol>
+          {recipe.instructions.map((instruction, index) => (
+            <li key={index}>{instruction}</li>
+          ))}
+        </ol>
+      </div>
 
       {/* Rating och kommentarsektion */}
-      <div className="recipe-comments-container">
+      <div className="recipe-footer">
+        <h2>Betygsätt detta recept:</h2>
+        <Rating id={id} />
         <CommentSection id={id} />
       </div>
       <div className="footer">
