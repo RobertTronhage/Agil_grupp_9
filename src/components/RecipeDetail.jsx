@@ -6,6 +6,7 @@ import RatingDisplay from './Rating/RatingDisplay';
 import Header from './Header';
 import CategoryAsideList from './Category/CategoryAsideList'; // Importera kategorilistan
 import './Recipe.css';
+import Footer from "./Footer/Footer";
 
 
 const RecipeDetail = () => {
@@ -21,19 +22,19 @@ const RecipeDetail = () => {
   useEffect(() => {
     const fetchAllCategories = async () => {
       try {
-        const response = await fetch('https://recept9-pedal.reky.se/recipes'); // Hämta alla recept
+        const response = await fetch("https://recept9-pedal.reky.se/recipes"); // Hämta alla recept
         if (!response.ok) {
-          throw new Error('Något gick fel vid hämtningen av recepten.');
+          throw new Error("Något gick fel vid hämtningen av recepten.");
         }
         const data = await response.json();
 
         // Extrahera alla kategorier från alla recept
-        const allCategories = data.flatMap(recipe => recipe.categories);
+        const allCategories = data.flatMap((recipe) => recipe.categories);
         const uniqueCategories = [...new Set(allCategories)]; // Skapa en lista med unika kategorier
         setCategories(uniqueCategories);
 
         // Hämta det enskilda receptet
-        const selectedRecipe = data.find(recipe => recipe._id === id);
+        const selectedRecipe = data.find((recipe) => recipe._id === id);
         setRecipe(selectedRecipe);
       } catch (error) {
         setError(error.message);
@@ -97,13 +98,17 @@ const RecipeDetail = () => {
 
       {/* Kategori och baktid */}
       <div className="recipe-category">
-        <p>Kategorier: {recipe.categories.join(', ')}</p>
+        <p>Kategorier: {recipe.categories.join(", ")}</p>
         <p>Tid att baka: {recipe.timeInMins} minuter</p>
       </div>
 
       {/* Bild och receptdetaljer */}
       <div className="recipe-header">
-        <img src={recipe.imageUrl} alt={recipe.title} className="recipe-image" />
+        <img
+          src={recipe.imageUrl}
+          alt={recipe.title}
+          className="recipe-image"
+        />
         <div className="recipe-info">
           <p>{recipe.description}</p>
         </div>
@@ -124,6 +129,9 @@ const RecipeDetail = () => {
         <h2>Betygsätt detta recept:</h2>
         <Rating id={id} />
         <CommentSection id={id} />
+      </div>
+      <div className="footer">
+        <Footer />
       </div>
     </div>
   );
