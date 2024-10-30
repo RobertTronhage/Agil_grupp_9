@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import CommentSection from "./Comment/CommentSection";
-import Rating from "./Rating/Rating";
-import Header from "./Header";
-import CategoryAsideList from "./Category/CategoryAsideList"; // Importera kategorilistan
-import "./Recipe.css";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import CommentSection from './Comment/CommentSection';
+import Rating from './Rating/Rating';
+import RatingDisplay from './Rating/RatingDisplay';
+import Header from './Header';
+import CategoryAsideList from './Category/CategoryAsideList'; // Importera kategorilistan
+import './Recipe.css';
 import Footer from "./Footer/Footer";
+
 
 const RecipeDetail = () => {
   const { id } = useParams();
@@ -78,9 +80,17 @@ const RecipeDetail = () => {
         onCategoryChange={handleCategoryChange}
       />
 
+
       {/* Titel och beskrivning */}
       <div className="recipe-header-title">
         <h1>{recipe.title}</h1>
+        <RatingDisplay id={id} />
+      </div>
+      <div className='recipe-header-props'>
+        <p>
+        {recipe.timeInMins}
+        </p>
+        <p> </p>
       </div>
       <div className="recipe-description">
         <p>{recipe.description}</p>
