@@ -1,16 +1,15 @@
 .recipe-detail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px auto;
-    max-width: 800px;
+
   }
   
   .recipe-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+  
     margin-bottom: 20px;
     width: 100%;
+  }
+  .recipe-img{
+    float: right;
   }
   
   .recipe-image {
@@ -34,4 +33,3 @@
     margin-top: 20px;
     width: 100%;
   }
-  
