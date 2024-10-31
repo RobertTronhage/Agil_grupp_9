@@ -122,7 +122,7 @@ const RecipeDetail = () => {
       </div>
 
          {/* Ingredienser och instruktioner */}
-         <div className="recipe-details-container">
+      <div className="recipe-details-container">
         <div className='recipe-ingredients'>
           <h2>Ingredienser</h2>
           <ul>
@@ -145,9 +145,7 @@ const RecipeDetail = () => {
       </div>
 
       {/* Rating och kommentarsektion */}
-      <div className="recipe-footer">
-        <h2>Betygsätt detta recept:</h2>
-        <Rating id={id} />
+      <div className="recipe-comments-container">
         <CommentSection id={id} />
       </div>
       <div className="footer">

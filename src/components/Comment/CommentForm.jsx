@@ -23,30 +23,30 @@ const CommentForm = ({onSubmit}) => {
   
   return(
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Namn:</label>
-        <input type="text" 
-        id="name" value={name} 
-        onChange={(e) => setName(e.target.value)} 
-        disabled={isSubmitting}
-        required 
-      />
-      </div>
-
-      <div>
-        <label htmlFor="comment">Kommentar:</label>
-        <textarea
-        id="comment"
-        value={comment}
-        onChange={(e)=> setComment(e.target.value)}
-        disabled={isSubmitting}
-        required
-        ></textarea>
-      </div>
-      <button id="submit-button" type="submit"
+    <div className="name-input">
+      <input type="text" 
+      placeholder="Namn"
+      id="name" value={name} 
+      onChange={(e) => setName(e.target.value)} 
       disabled={isSubmitting}
-      >Skicka kommentar</button>
-    </form>
+      required 
+    />
+    </div>
+
+    <div className="comment-input">
+      <textarea
+      placeholder="Skriv din kommentar"
+      id="comment"
+      value={comment}
+      onChange={(e)=> setComment(e.target.value)}
+      disabled={isSubmitting}
+      required
+      ></textarea>
+    </div>
+    <button id="submit-button" type="submit"
+    disabled={isSubmitting}
+    >Skicka kommentar</button>
+  </form>
   );
 };
 
