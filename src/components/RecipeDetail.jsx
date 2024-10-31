@@ -121,30 +121,27 @@ const RecipeDetail = () => {
 
       </div>
 
-      {/* Ingredienser och receptdetaljer */}
-      <div className="recipe-details-container">
-        <div className="recipe-info">
-          <p>{recipe.description}</p>
+         {/* Ingredienser och instruktioner */}
+         <div className="recipe-details-container">
+        <div className='recipe-ingredients'>
+          <h2>Ingredienser</h2>
+          <ul>
+            {recipe.ingredients.map((ingredient, index)=>(
+            <li key={index}> <span>{ingredient.amount}</span> {ingredient.unit} {ingredient.name}</li>
+            ))}
+          </ul>
         </div>
-      </div>
-
-      <div>
-        <h2>Ingredienser</h2>
-        <ul>
-          {recipe.ingredients.map((ingredient, index)=>(
-          <li key={index}> {ingredient.amount} {ingredient.unit} {ingredient.name}</li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Instruktioner */}
-      <div className="recipe-instructions">
-        <h2>Instruktioner:</h2>
-        <ol>
-          {recipe.instructions.map((instruction, index) => (
+        
+        <div className="recipe-instructions">
+          <h2>Instruktioner:</h2>
+          <ol>
+            {recipe.instructions.map((instruction, index) => (
             <li key={index}>{instruction}</li>
-          ))}
-        </ol>
+            ))}
+          </ol>
+          <h4>Vad tyckte du om receptet?</h4>
+          <Rating id={id} />
+        </div>
       </div>
 
       {/* Rating och kommentarsektion */}
