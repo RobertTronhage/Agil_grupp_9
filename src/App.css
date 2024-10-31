@@ -139,6 +139,7 @@ display: flex;
   margin-top: 2rem;
 }
 .recipe-ingredients{
+  background-color: var(--secondaryAccentColor-transparant);
   padding: 0.5rem 2rem;
   border: 1px solid var(--border-grey);
   border-radius: 8px;
@@ -152,14 +153,17 @@ display: flex;
   border: 1px solid var(--border-grey);
   padding: 0.5rem;
   margin: 0.5rem 0rem;
+  background-color: var(--lichtColor);
 }
 
 .recipe-ingredients ul li span{
   font-weight: 700;
+
 }
 
 .recipe-instructions {
   padding: 0.5rem 2rem;
+  background-color: var(--secondaryAccentColor-transparant);
   border: 1px solid var(--border-grey);
   border-radius: 8px;
   margin-top: 2rem;
@@ -172,6 +176,7 @@ display: flex;
 
 .recipe-instructions ol li{
   border: 1px solid var(--border-grey);
+  background-color: var(--lichtColor);
   padding: 0.5rem;
   margin: 0.5rem 0rem;
 }
