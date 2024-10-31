@@ -244,6 +244,11 @@ display: flex;
   color: #333;
 }
 
+.category-list-wrapper {
+  height: 0;
+  padding: 0;
+  visibility: hidden;
+}
 
 .footer{
   flex: 1;
