@@ -135,6 +135,7 @@ display: flex;
   
 }
 .recipe-details-container{
+  max-width: 90vw;
   margin-top: 2rem;
 }
 .recipe-ingredients{
