@@ -89,6 +89,8 @@ display: flex;
   align-items: center;
 }
 
+/*
+
 .recipe-header-containter {
   display: grid;
   grid-template-columns: auto auto;
@@ -96,7 +98,28 @@ display: flex;
   border: 1px solid var(--border-grey);
   border-radius: 8px;
   margin-top: 2rem;
-  max-width: 800px; /* Max width of the container (can be set bigger)*/
+  max-width: 800px; /* Max width of the container (can be set bigger)
+}
+
+*/
+
+.recipe-header-containter{
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid var(--border-grey);
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+.recipe-img-container{
+  padding: 1rem;
+}
+
+.recipe-image {
+  max-width: 100%;
+  border-radius: 8px;
+  object-fit: contain;
 }
 
 .recipe-title{
@@ -111,30 +134,15 @@ display: flex;
   padding: 0.3rem;
   
 }
-
-.recipe-img-container{
-  padding: 1rem;
-}
-
-.recipe-image {
-  max-width: 400px;
-  border-radius: 8px;
-  object-fit: contain;
-
-}
-
-.recipe-details-container {
-  display: grid;
-  grid-template-columns: auto auto;
+.recipe-details-container{
+  max-width: 90vw;
   margin-top: 2rem;
-  max-width: 800px; /* Max width of the container (can be set bigger)*/
 }
-
 .recipe-ingredients{
+  background-color: var(--secondaryAccentColor-transparant);
   padding: 0.5rem 2rem;
   border: 1px solid var(--border-grey);
   border-radius: 8px;
-  margin: 0 1rem;
 }
 
 .recipe-ingredients ul{
@@ -145,25 +153,30 @@ display: flex;
   border: 1px solid var(--border-grey);
   padding: 0.5rem;
   margin: 0.5rem 0rem;
+  background-color: var(--lichtColor);
 }
 
 .recipe-ingredients ul li span{
   font-weight: 700;
+
 }
 
 .recipe-instructions {
   padding: 0.5rem 2rem;
+  background-color: var(--secondaryAccentColor-transparant);
   border: 1px solid var(--border-grey);
   border-radius: 8px;
-  margin: 0 1rem;
+  margin-top: 2rem;
   text-align: center;
 }
 .recipe-instructions ol{
   list-style-position: inside;
+  text-align: start;
 }
 
 .recipe-instructions ol li{
   border: 1px solid var(--border-grey);
+  background-color: var(--lichtColor);
   padding: 0.5rem;
   margin: 0.5rem 0rem;
 }
@@ -173,15 +186,13 @@ display: flex;
 }
 
 .recipe-comments-container{
-  max-width: 800px;
-  min-width: 800px;
+  max-width: 90vw;
+  min-width: 90vw;
   background-color: var(--secondaryAccentColor-transparant);
   border: 0px solid var(--border-grey);
   border-radius: 8px;
   margin-top: 2rem;
 }
-
-
 .recipe-description {
   text-align: center;
   margin-bottom: 20px; /* Lägg till lite utrymme under beskrivningen */
@@ -239,7 +250,7 @@ display: flex;
   .home-icon {
     visibility: hidden;
   }
-
+  
 }
 /*For small screens*/
 
@@ -263,7 +274,7 @@ display: flex;
     justify-content: center;
     padding: 20px;
   }
-
+  
   aside.category-list-wrapper {
     position: fixed;
     top: 300px;
@@ -278,20 +289,21 @@ display: flex;
     visibility: visible;
     border-radius: 8px;
     border: 1px solid var(--border-grey);
-
+    
   }
-
+  
   .content-wrapper {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     margin-left: 220px;
-    }
-
+  }
+  
   .category-dropdown {
     visibility: hidden;
     display: block;
   }
+  
 }
 /* for tablest in horizontal mode and small computer screens*/
 @media only screen and (min-width: 992px) {
@@ -301,6 +313,50 @@ display: flex;
     gap: 20px;
     justify-content: center;
     padding: 20px;
+  }
+  
+  .recipe-header-containter {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 1.5rem;
+    border: 1px solid var(--border-grey);
+    border-radius: 8px;
+    margin-top: 2rem;
+    max-width: 800px; /* Max width of the container (can be set bigger)*/
+  }
+  
+  .recipe-img-container{
+    padding: 1rem;
+  }
+  
+  .recipe-image {
+    max-width: 400px;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+  
+  .recipe-details-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 2rem;
+    max-width: 800px; /* Max width of the container (can be set bigger)*/
+  }
+  
+  .recipe-instructions{
+    margin: 0 1rem;
+  }
+  
+  .recipe-ingredients{
+    margin: 0 1rem;
+  }
+
+  .recipe-comments-container{
+    max-width: 800px;
+    min-width: 800px;
+    background-color: var(--secondaryAccentColor-transparant);
+    border: 0px solid var(--border-grey);
+    border-radius: 8px;
+    margin-top: 2rem;
   }
 }
 
