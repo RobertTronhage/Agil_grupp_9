@@ -73,7 +73,7 @@ const RecipeDetail = () => {
   const difficulty = getDifficulty(recipe.timeInMins);
   
   return (
-    <div className="recipe-detail">
+    <div className="recipe-detail container">
       {/* Header med sökruta och ikon */}
       <Header
         searchTerm={searchTerm}

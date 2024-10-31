@@ -1,8 +1,8 @@
 /* footer.css */
 
 .footer-container {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--darkColor);
+    color: var(--lichtColor);
     padding: 20px;
     text-align: center;
   }
@@ -28,24 +28,29 @@
     margin: 5px 0;
   }
   
+  .footer-link-list li a{
+    color: var(--acentColor);
+  }
+
   .footer-social-icons {
     display: flex;
+    justify-content: center;
     gap: 10px;
     font-size: 1.5em;
   }
   
   .footer-social-icons a {
-    color: #fff;
+    color: var(--lichtColor);
     transition: color 0.3s;
   }
   
   .footer-social-icons a:hover {
-    color: #1da1f2;
+    color: var(--acentColor);
   }
   
   .footer-copyright {
     margin-top: 10px;
     font-size: 0.9em;
-    color: #ccc;
+    color: var(--lichtColor);
   }
   

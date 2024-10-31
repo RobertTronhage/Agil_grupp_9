@@ -95,10 +95,10 @@ const HomePage = () => {
             />
           ))}
         </div>
+      </div>
         <div className="footer">
           <Footer />
         </div>
-      </div>
     </div>
   );
 };

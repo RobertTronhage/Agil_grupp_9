@@ -227,6 +227,10 @@ display: flex;
   visibility: hidden;
 }
 
+.footer{
+  flex: 1;
+  width: 100vw;
+}
 
 /* Media Queries for differnet types of screens */
 
