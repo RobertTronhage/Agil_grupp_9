@@ -35,13 +35,6 @@ const Header = ({ searchTerm, onSearchChange, categories, selectedCategory, onCa
         />
       </div>
 
-      {/* Rubriken för den valda kategorin */}
-      {selectedCategory && (
-  <h2 className="selected-category-title">
-    {selectedCategory}
-  </h2>
-)}
-
     </header>
   );
 };
