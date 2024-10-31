@@ -30,11 +30,11 @@ button{
   color: var(--primaryDarkColor);
 }
 input:disabled {
-  background-color: white;
+  background-color: var(--primaryDarkColor);
 }
 
 textarea:disabled {
-  background-color: white;
+  background-color: var(--primaryDarkColor);
 }
 
 .comment-list{
