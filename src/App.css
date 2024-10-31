@@ -98,7 +98,9 @@ display: flex;
   border: 1px solid var(--border-grey);
   border-radius: 8px;
   margin-top: 2rem;
+
   max-width: 800px; /* Max width of the container (can be set bigger)
+
 }
 
 */
@@ -126,6 +128,7 @@ display: flex;
   text-align: center;
 }
 
+
 .recipe-header-props{
   display: flex;
   border: 1px solid var(--border-grey);
@@ -143,11 +146,14 @@ display: flex;
   padding: 0.5rem 2rem;
   border: 1px solid var(--border-grey);
   border-radius: 8px;
+
 }
 
-.recipe-ingredients ul{
-  list-style-type: none
+.recipe-instructions {
+  width: 100%;
+  margin-top: 20px;
 }
+
 
 .recipe-ingredients ul li{
   border: 1px solid var(--border-grey);
@@ -179,11 +185,14 @@ display: flex;
   background-color: var(--lichtColor);
   padding: 0.5rem;
   margin: 0.5rem 0rem;
+
 }
 
-.recipe-instructions h4{
-  margin-top: 2.5rem;
+.recipe-header-title {
+  text-align: center;
+  margin-bottom: 10px;
 }
+
 
 .recipe-comments-container{
   max-width: 90vw;
@@ -193,6 +202,7 @@ display: flex;
   border-radius: 8px;
   margin-top: 2rem;
 }
+
 .recipe-description {
   text-align: center;
   margin-bottom: 20px; /* Lägg till lite utrymme under beskrivningen */
@@ -208,6 +218,19 @@ display: flex;
   margin: 5px 0; /* Justera marginaler mellan kategorin och tiden */
 }
 
+.recipe-info {
+  flex-grow: 1;  /* Fyller upp utrymmet bredvid bilden */
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrerar informationen vertikalt om det behövs */
+}
+
+.recipe-instructions {
+  width: 100%;
+  margin-top: 20px;
+}
+
 .recipe-footer {
   text-align: center;
   margin-top: 20px;
@@ -221,11 +244,6 @@ display: flex;
   color: #333;
 }
 
-.category-list-wrapper {
-  height: 0;
-  padding: 0;
-  visibility: hidden;
-}
 
 .footer{
   flex: 1;
