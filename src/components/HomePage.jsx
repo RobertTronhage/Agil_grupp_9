@@ -5,6 +5,18 @@ import CategoryAsideList from "./Category/CategoryAsideList";
 import Footer from "./Footer/Footer";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * HomePage component fetches and displays a list of recipes.
+ * It allows users to search for recipes by title and filter by category.
+ *
+ * @component
+ * @example
+ * return (
+ *   <HomePage />
+ * )
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -96,9 +108,9 @@ const HomePage = () => {
           ))}
         </div>
       </div>
-        <div className="footer">
-          <Footer />
-        </div>
+      <div className="footer">
+        <Footer />
+      </div>
     </div>
   );
 };

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/HomePage.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/HomePage.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
+import RecipeCard from "./RecipeCard";
+import Header from "./Header";
+import CategoryAsideList from "./Category/CategoryAsideList";
+import Footer from "./Footer/Footer";
+import { useNavigate } from "react-router-dom";
+
+/**
+ * HomePage component fetches and displays a list of recipes.
+ * It allows users to search for recipes by title and filter by category.
+ *
+ * @component
+ * @example
+ * return (
+ *   &lt;HomePage />
+ * )
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
+const HomePage = () => {
+  const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const response = await fetch("https://recept9-pedal.reky.se/recipes");
+        if (!response.ok) {
+          throw new Error("Något gick fel vid hämtningen av data.");
+        }
+        const data = await response.json();
+        setRecipes(data);
+        setFilteredRecipes(data);
+
+        const allCategories = data.flatMap((recipe) => recipe.categories);
+        const uniqueCategories = [...new Set(allCategories)];
+        setCategories(uniqueCategories);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecipes();
+  }, []);
+
+  useEffect(() => {
+    const filtered = recipes.filter((recipe) => {
+      return recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    setFilteredRecipes(filtered);
+  }, [searchTerm, recipes]);
+
+  const handleSearchChange = (searchValue) => {
+    setSearchTerm(searchValue);
+  };
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    if (category) {
+      navigate(`/recept/kategori/${category}`);
+    } else {
+      setFilteredRecipes(recipes);
+      navigate("/");
+    }
+  };
+
+  if (loading) {
+    return &lt;p>Loading...&lt;/p>;
+  }
+
+  if (error) {
+    return &lt;p>Error: {error}&lt;/p>;
+  }
+
+  return (
+    &lt;div className="homepage container">
+      &lt;Header
+        searchTerm={searchTerm}
+        onSearchChange={handleSearchChange}
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryChange={handleCategoryChange}
+      />
+      &lt;div className="content-wrapper">
+        &lt;CategoryAsideList
+          categories={categories}
+          selectedCategory={selectedCategory}
+        />
+        &lt;div className="recipes homepage-recipes">
+          {filteredRecipes.map((recipe, index) => (
+            &lt;RecipeCard
+              key={index}
+              title={recipe.title}
+              imageUrl={recipe.imageUrl}
+              categories={recipe.categories}
+              timeInMins={recipe.timeInMins}
+              id={recipe._id}
+            />
+          ))}
+        &lt;/div>
+      &lt;/div>
+      &lt;div className="footer">
+        &lt;Footer />
+      &lt;/div>
+    &lt;/div>
+  );
+};
+
+export default HomePage;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-main.html">main</a></li></ul><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#CategoryAsideList">CategoryAsideList</a></li><li><a href="global.html#CategoryDropDown">CategoryDropDown</a></li><li><a href="global.html#CommentForm">CommentForm</a></li><li><a href="global.html#CommentList">CommentList</a></li><li><a href="global.html#CommentSection">CommentSection</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#HomePage">HomePage</a></li><li><a href="global.html#Rating">Rating</a></li><li><a href="global.html#RatingDisplay">RatingDisplay</a></li><li><a href="global.html#SearchBar">SearchBar</a></li><li><a href="global.html#fetchRecipesByCategoryFetchesrecipesfromtheAPIandfiltersthembasedontheselectedcategory.Alsoextractsandsetsuniquecategoriesfromthefetchedrecipes.">fetchRecipesByCategoryFetches recipes from the API and filters them based on the selected category.Also extracts and sets unique categories from the fetched recipes.</a></li><li><a href="global.html#getDifficulty">getDifficulty</a></li><li><a href="global.html#handleCategoryChange">handleCategoryChange</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Fri Nov 01 2024 14:15:03 GMT+0100 (centraleuropeisk normaltid)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
