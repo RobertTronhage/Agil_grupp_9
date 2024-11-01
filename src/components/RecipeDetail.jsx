@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import CommentSection from './Comment/CommentSection';
 import Rating from './Rating/Rating';
 import RatingDisplay from './Rating/RatingDisplay';
-import Header from './Header';
+import HeaderRecipe from './HeaderRecipe';
 import { FaRegClock } from "react-icons/fa6";
 import CategoryAsideList from './Category/CategoryAsideList'; // Importera kategorilistan
 import Footer from "./Footer/Footer";
@@ -14,11 +14,10 @@ const RecipeDetail = () => {
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [userRating, setUserRating] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [categories, setCategories] = useState([]); // Här hanterar vi kategorier
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [ingredientCount, setIngredientCount] = useState(0);
+
   
   
   useEffect(() => {
@@ -53,7 +52,7 @@ const RecipeDetail = () => {
     if (time >= 30 && time <= 60) return 'Medel';  // Medel
     return 'Avancerad';  // Avancerad
   };
-  
+
   
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -75,14 +74,13 @@ const RecipeDetail = () => {
   return (
     <div className="recipe-detail container">
       {/* Header med sökruta och ikon */}
-      <Header
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
+      <HeaderRecipe
         categories={categories}
         selectedCategory={selectedCategory}
         onCategoryChange={handleCategoryChange}
       />
 
+<div className='content-wrapper'>
       {/* Kategorilistan, som nu använder alla unika kategorier */}
       <CategoryAsideList
         categories={categories}
@@ -90,7 +88,7 @@ const RecipeDetail = () => {
         onCategoryChange={handleCategoryChange}
       />
 
-
+      <div className='recipe-content'>
       {/* Titel, beskrivning och bild*/}
       <div className='recipe-header-containter'>
         <div className='recipe-header'>
@@ -148,6 +146,8 @@ const RecipeDetail = () => {
       <div className="recipe-comments-container">
         <CommentSection id={id} />
       </div>
+      </div>
+  </div>
       <div className="footer">
         <Footer />
       </div>

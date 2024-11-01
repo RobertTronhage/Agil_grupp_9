@@ -2,9 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import homeIcon from '../assets/home_icon.png';
-import CategoryDropDown from './Category/CategoryDropDown';
+import CategoryDropDown from './Category/CategoryDropDown'
 
-const Header = ({ searchTerm, onSearchChange, categories, selectedCategory, onCategoryChange }) => {
+
+const HeaderRecipe = ({ searchTerm, onSearchChange, categories, selectedCategory, onCategoryChange }) => {
   return (
     <header className="header" style={{ textAlign: 'center', padding: '20px 0' }}>
       {/* Wrapper för ikonen och texten */}
@@ -13,7 +14,7 @@ const Header = ({ searchTerm, onSearchChange, categories, selectedCategory, onCa
         <Link to="/" style={{ position: 'absolute', left: '20px', top: '0' }}>
           <img src={homeIcon} alt="Home" className="home-icon" style={{ width: '100px', height: 'auto' }} />
         </Link>
-
+        
         {/* Texten "Kreativa Bakelser" centrerad över sökrutan */}
         <div>
         <span className="header-text" style={{ fontSize: '34px', fontWeight: 'bold' }}>
@@ -30,13 +31,13 @@ const Header = ({ searchTerm, onSearchChange, categories, selectedCategory, onCa
           selectedCategory={selectedCategory} 
           onCategoryChange={onCategoryChange}
         />
-        <div>
-
+        <div className='searchbar-hidden'>
         <SearchBar
           searchTerm={searchTerm}
           onSearchChange={onSearchChange}
           style={{ width: '50px', padding: '8px', fontSize: '14px' }}
         />
+
         </div>
       </div>
 
@@ -44,4 +45,4 @@ const Header = ({ searchTerm, onSearchChange, categories, selectedCategory, onCa
   );
 };
 
-export default Header;
+export default HeaderRecipe;
