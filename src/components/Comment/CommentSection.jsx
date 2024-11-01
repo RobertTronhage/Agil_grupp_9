@@ -64,7 +64,6 @@ const CommentSection = ({id}) =>{
             <CommentForm onSubmit={handleSubmitComment} />
             {sucessMessage && <p style={{ color: "green" }}>{sucessMessage}</p>}
             {error && <p style={{ color: "red" }}>{error}</p>}
-            <div class="line"></div>
             <div className="comment-list">
             <h3>Kommentarer</h3>
             <CommentList comments={comments} />

@@ -89,20 +89,9 @@ display: flex;
   align-items: center;
 }
 
-/*
-
-.recipe-header-containter {
-  display: grid;
-  grid-template-columns: auto auto;
-  padding: 1.5rem;
-  border: 1px solid var(--border-grey);
-  border-radius: 8px;
-  margin-top: 2rem;
-  max-width: 800px; /* Max width of the container (can be set bigger)
+.searchbar-hidden{
+  visibility: hidden;
 }
-
-*/
-
 .recipe-header-containter{
   max-width: 90vw;
   display: flex;
@@ -281,7 +270,6 @@ display: flex;
   
   aside.category-list-wrapper {
     position: fixed;
-    top: 300px;
     left: 20px;
     width: 12.5rem;
     height: 100vh;
