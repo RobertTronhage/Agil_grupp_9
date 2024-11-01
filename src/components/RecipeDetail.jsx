@@ -75,12 +75,12 @@ const RecipeDetail = () => {
     <div className="recipe-detail container">
       {/* Header med sökruta och ikon */}
       <HeaderRecipe
-  
         categories={categories}
         selectedCategory={selectedCategory}
         onCategoryChange={handleCategoryChange}
       />
 
+<div className='content-wrapper'>
       {/* Kategorilistan, som nu använder alla unika kategorier */}
       <CategoryAsideList
         categories={categories}
@@ -88,7 +88,7 @@ const RecipeDetail = () => {
         onCategoryChange={handleCategoryChange}
       />
 
-<div className='recipe-content'>
+      <div className='recipe-content'>
       {/* Titel, beskrivning och bild*/}
       <div className='recipe-header-containter'>
         <div className='recipe-header'>
@@ -145,6 +145,7 @@ const RecipeDetail = () => {
       {/* Rating och kommentarsektion */}
       <div className="recipe-comments-container">
         <CommentSection id={id} />
+      </div>
       </div>
   </div>
       <div className="footer">

@@ -25,7 +25,7 @@ const HeaderRecipe = ({ searchTerm, onSearchChange, categories, selectedCategory
       </div>
 
       {/* Sökrutan */}
-      <div style={{ maxWidth: '100%', padding: '0 300px' }}>
+      <div>
         <CategoryDropDown 
           categories={categories} 
           selectedCategory={selectedCategory} 
