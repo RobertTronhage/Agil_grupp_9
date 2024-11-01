@@ -79,6 +79,9 @@ header {
   position: relative;
 }
 
+.selected-category-text{
+  text-align: center;
+}
 
 
 /*
@@ -269,11 +272,10 @@ display: flex;
   }
   
   aside.category-list-wrapper {
-    position: fixed;
+    position: sticky;
+    top: 32px;
     left: 20px;
-    width: 12.5rem;
-    height: 100vh;
-    overflow-y: auto;
+    height: auto;
     padding: 10px;
     margin: 1.25rem;
     background-color: var(--secondaryAccentColor-transparant);
@@ -288,7 +290,7 @@ display: flex;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-left: 220px;
+   
   }
   
   .category-dropdown {
@@ -363,9 +365,7 @@ display: flex;
     padding: 20px;
   }
 
-  .content-wrapper {
-    margin-left: 220px;
-  }
+
 
   .category-list {
     list-style: none;
