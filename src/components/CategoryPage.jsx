@@ -5,6 +5,28 @@ import CategoryAsideList from "./Category/CategoryAsideList";
 import RecipeCard from "./RecipeCard";
 import Footer from "./Footer/Footer";
 
+/**
+ * CategoryPage component fetches and displays recipes based on the selected category from the URL.
+ * It also fetches and displays all unique categories.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ *
+ * @example
+ * return <CategoryPage />
+ *
+ * @remarks
+ * This component uses the `useParams` hook from `react-router-dom` to get the selected category from the URL.
+ * It uses the `useState` and `useEffect` hooks to manage state and side effects.
+ *
+ * @function fetchRecipesByCategory
+ * Fetches recipes from the API and filters them based on the selected category.
+ * Also extracts and sets unique categories from the fetched recipes.
+ *
+ * @throws Will throw an error if the fetch request fails.
+ *
+ * @returns {void}
+ */
 const CategoryPage = () => {
   const { kategori } = useParams(); // Hämta vald kategori från URL:en
   const [recipes, setRecipes] = useState([]);
@@ -68,28 +90,32 @@ const CategoryPage = () => {
 
   return (
     <div className="category-page container">
+
       <Header 
         searchTerm={searchTerm}
         onSearchChange={handleSearchChange} 
         categories={categories} 
+
         selectedCategory={kategori}
       />
-  
+
       <div className="content-wrapper">
-        <CategoryAsideList 
+        <CategoryAsideList
           categories={categories}
           selectedCategory={kategori}
         />
-  
+
         {/* Centrera vald kategori ovanför recepten */}
         <div className="recipes-section">
           <div className="selected-category-text">
             <h2>Kategori: {kategori}</h2>
           </div>
           <div className="recipes category-recipes">
+
             {filteredRecipes.length > 0 ? (
               filteredRecipes.map((recipe, index) => (
                 <RecipeCard key={index}
+
                   title={recipe.title}
                   imageUrl={recipe.imageUrl}
                   categories={recipe.categories}
@@ -103,11 +129,11 @@ const CategoryPage = () => {
           </div>
         </div>
       </div>
-        <div className="footer">
-          <Footer />
-        </div>
+      <div className="footer">
+        <Footer />
+      </div>
     </div>
-  );    
+  );
 };
 
 export default CategoryPage;
