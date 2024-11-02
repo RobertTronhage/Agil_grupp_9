@@ -12,11 +12,6 @@ import "./comment.css";
  *
  * @returns {JSX.Element} The rendered CommentSection component.
  */
-const CommentSection = ({ id }) => {
-  const [comments, setComments] = useState([]);
-  const [error, setError] = useState("");
-  const [sucessMessage, setSuccessMessage] = useState("");
-
 
 const CommentSection = ({id}) =>{
     const[comments, setComments] = useState([]); 
