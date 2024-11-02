@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import SearchBar from "./SearchBar";
-import homeIcon from "../assets/home_icon.png";
-import CategoryDropDown from "./Category/CategoryDropDown";
-import "./Header.css";
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar';
+import homeIcon from '../assets/home_icon.png';
+import CategoryDropDown from './Category/CategoryDropDown';
 
 /**
  * Header component that displays a header section with a home icon, title text, category dropdown, and search bar.
@@ -41,26 +41,32 @@ const Header = ({
         </Link>
 
         {/* Texten "Kreativa Bakelser" centrerad över sökrutan */}
-        <span
-          className="header-text"
-          style={{ fontSize: "34px", fontWeight: "bold" }}
-        >
+
+        <div>
+        <span className="header-text" style={{ fontSize: '34px', fontWeight: 'bold' }}>
+
           Kreativa Bakelser
         </span>
+        <p>Låt fantasin jäsa i köket!</p>
+        </div>
       </div>
 
       {/* Sökrutan */}
-      <div style={{ maxWidth: "100%", padding: "0 300px" }}>
-        <CategoryDropDown
-          categories={categories}
-          selectedCategory={selectedCategory}
+
+      <div>
+        <CategoryDropDown 
+          categories={categories} 
+          selectedCategory={selectedCategory} 
           onCategoryChange={onCategoryChange}
         />
+        <div>
+
         <SearchBar
           searchTerm={searchTerm}
           onSearchChange={onSearchChange}
           style={{ width: "50px", padding: "8px", fontSize: "14px" }}
         />
+        </div>
       </div>
     </header>
   );

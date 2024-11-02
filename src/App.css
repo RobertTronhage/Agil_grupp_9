@@ -38,7 +38,7 @@ a:hover {
   
 }
 input.search-input {
-  width: 100%;
+  max-width: 50%;
   padding: 10px;
   margin-bottom: 20px;
   border-radius: 4px;
@@ -62,13 +62,11 @@ header {
   border-radius: 8px;
   flex: 1;
 }
-
-.icon-text-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-  position: relative;
+.header-text{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
 }
 
 .icon-text-wrapper {
@@ -79,6 +77,32 @@ header {
   position: relative;
 }
 
+.icon-text-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.homepage-recipes-section{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+#home-info{
+  width: 50%;
+  text-align: center;
+}
+.homepage-info{
+  width: 50%;
+  padding: 8px;
+  border: 1px solid var(--border-grey);
+  background-color: var(--secondaryAccentColor-transparant);
+}
+.selected-category-text{
+  text-align: center;
+}
 
 
 /*
@@ -89,20 +113,9 @@ display: flex;
   align-items: center;
 }
 
-/*
-
-.recipe-header-containter {
-  display: grid;
-  grid-template-columns: auto auto;
-  padding: 1.5rem;
-  border: 1px solid var(--border-grey);
-  border-radius: 8px;
-  margin-top: 2rem;
-  max-width: 800px; /* Max width of the container (can be set bigger)
+.searchbar-hidden{
+  visibility: hidden;
 }
-
-*/
-
 .recipe-header-containter{
   max-width: 90vw;
   display: flex;
@@ -114,6 +127,9 @@ display: flex;
 }
 .recipe-img-container{
   padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .recipe-image {
@@ -186,8 +202,7 @@ display: flex;
 }
 
 .recipe-comments-container{
-  max-width: 90vw;
-  min-width: 90vw;
+  min-width: 60vw;
   background-color: var(--secondaryAccentColor-transparant);
   border: 0px solid var(--border-grey);
   border-radius: 8px;
@@ -281,12 +296,10 @@ display: flex;
   }
   
   aside.category-list-wrapper {
-    position: fixed;
-    top: 300px;
+    position: sticky;
+    top: 32px;
     left: 20px;
-    width: 12.5rem;
-    height: 100vh;
-    overflow-y: auto;
+    height: auto;
     padding: 10px;
     margin: 1.25rem;
     background-color: var(--secondaryAccentColor-transparant);
@@ -298,10 +311,11 @@ display: flex;
   }
   
   .content-wrapper {
+    max-width: 80vw;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-left: 220px;
+   
   }
   
   .category-dropdown {
@@ -319,7 +333,26 @@ display: flex;
     justify-content: center;
     padding: 20px;
   }
+
+  .recipe-content{
+    width: 1050px;
+  }
   
+}
+
+/* Screens bigger than 1200px*/
+
+@media only screen and (min-width: 1200px) {
+  .recipes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+  .recipe-content{
+    width: 1400px;
+  }
   .recipe-header-containter {
     display: grid;
     grid-template-columns: auto auto;
@@ -327,7 +360,6 @@ display: flex;
     border: 1px solid var(--border-grey);
     border-radius: 8px;
     margin-top: 2rem;
-    max-width: 800px; /* Max width of the container (can be set bigger)*/
   }
   
   .recipe-img-container{
@@ -344,7 +376,6 @@ display: flex;
     display: grid;
     grid-template-columns: auto auto;
     margin-top: 2rem;
-    max-width: 800px; /* Max width of the container (can be set bigger)*/
   }
   
   .recipe-instructions{
@@ -354,31 +385,16 @@ display: flex;
   .recipe-ingredients{
     margin: 0 1rem;
   }
-
+  
   .recipe-comments-container{
-    max-width: 800px;
-    min-width: 800px;
+   
     background-color: var(--secondaryAccentColor-transparant);
     border: 0px solid var(--border-grey);
     border-radius: 8px;
     margin-top: 2rem;
   }
-}
+  
 
-/* Screens bigger than 1200px*/
-
-@media only screen and (min-width: 1200px) {
-  .recipes {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .content-wrapper {
-    margin-left: 220px;
-  }
 
   .category-list {
     list-style: none;

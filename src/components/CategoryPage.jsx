@@ -33,6 +33,8 @@ const CategoryPage = () => {
   const [categories, setCategories] = useState([]); // Lägg till state för kategorier
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchRecipesByCategory = async () => {
@@ -50,10 +52,12 @@ const CategoryPage = () => {
         setCategories(uniqueCategories); // Uppdatera kategorier
 
         // Filtrera recept baserat på vald kategori
-        const filteredRecipes = data.filter((recipe) =>
+        const categoryRecipes = data.filter((recipe) =>
           recipe.categories.includes(kategori)
         );
-        setRecipes(filteredRecipes);
+        setFilteredRecipes(categoryRecipes);
+        setRecipes(categoryRecipes);
+    
       } catch (error) {
         setError(error.message);
       } finally {
@@ -64,6 +68,17 @@ const CategoryPage = () => {
     fetchRecipesByCategory();
   }, [kategori]); // Uppdatera när kategori i URL ändras
 
+  useEffect(() => {
+    const filtered = recipes.filter((recipe) => {
+      return recipe.title.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    setFilteredRecipes(filtered);
+  }, [searchTerm, recipes]);
+
+  const handleSearchChange = (searchValue) => {
+    setSearchTerm(searchValue);
+  };
+
   if (loading) {
     return <p>Laddar...</p>;
   }
@@ -72,12 +87,15 @@ const CategoryPage = () => {
     return <p>Fel: {error}</p>;
   }
 
+
   return (
     <div className="category-page container">
-      <Header
-        searchTerm=""
-        onSearchChange={() => {}}
-        categories={categories}
+
+      <Header 
+        searchTerm={searchTerm}
+        onSearchChange={handleSearchChange} 
+        categories={categories} 
+
         selectedCategory={kategori}
       />
 
@@ -93,10 +111,11 @@ const CategoryPage = () => {
             <h2>Kategori: {kategori}</h2>
           </div>
           <div className="recipes category-recipes">
-            {recipes.length > 0 ? (
-              recipes.map((recipe, index) => (
-                <RecipeCard
-                  key={index}
+
+            {filteredRecipes.length > 0 ? (
+              filteredRecipes.map((recipe, index) => (
+                <RecipeCard key={index}
+
                   title={recipe.title}
                   imageUrl={recipe.imageUrl}
                   categories={recipe.categories}
