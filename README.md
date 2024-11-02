@@ -6,36 +6,6 @@ Group Project React
 
 This project is a React-based web application developed by Agil_grupp_9. The purpose of the project is to create a user-friendly and responsive web application that manages recipes.
 
-### Installation
-
-To install and run the project locally, follow these steps:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Agil_grupp_9/projekt.git
-   ```
-2. Navigate to the project folder:
-   ```bash
-   cd projekt
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-### Build and Start the Project
-
-To build and start the project, use the following commands:
-
-1. Build the project:
-   ```bash
-   npm run build
-   ```
-2. Start the development server:
-   ```bash
-   npm start
-   ```
-
 ### Folder Structure
 
 The project's folder structure is as follows:
@@ -78,6 +48,36 @@ SearchBar component renders an input field for searching recipes.
 
 getDifficulty(props) → {JSX.Element}
 RecipeCard component displays a recipe card with details such as title, image, categories, time, and difficulty.
+
+### Installation
+
+To install and run the project locally, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Agil_grupp_9/projekt.git
+   ```
+2. Navigate to the project folder:
+   ```bash
+   cd projekt
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Build and Start the Project
+
+To build and start the project, use the following commands:
+
+1. Build the project:
+   ```bash
+   npm run build
+   ```
+2. Start the development server:
+   ```bash
+   npm start
+   ```
 
 ### Contribute to the Project
 
