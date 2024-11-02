@@ -2,6 +2,16 @@ import React from "react";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import "./Footer.css";
 
+/**
+ * Footer component that displays the footer section of the website.
+ * It includes contact information, quick links, and social media icons.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Footer />
+ * )
+ */
 const Footer = () => {
   return (
     <footer className="footer-container">

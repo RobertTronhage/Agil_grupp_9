@@ -1,7 +1,21 @@
 import React, { useEffect, useState } from "react";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
-import './comment.css'
+import "./comment.css";
+
+/**
+ * CommentSection component fetches and displays comments for a specific recipe.
+ * It also allows users to submit new comments.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.id - The ID of the recipe for which comments are fetched.
+ *
+ * @returns {JSX.Element} The rendered CommentSection component.
+ */
+const CommentSection = ({ id }) => {
+  const [comments, setComments] = useState([]);
+  const [error, setError] = useState("");
+  const [sucessMessage, setSuccessMessage] = useState("");
 
 
 const CommentSection = ({id}) =>{
@@ -42,22 +56,17 @@ const CommentSection = ({id}) =>{
                 body: JSON.stringify(newComment),
             }
         );
-        if(response.ok){
-            const savedComment = await response.json();
-            setComments([...comments,savedComment,]); 
-            setError("");
-            setSuccessMessage("Tack för din kommentar!");
-
-            setTimeout(() => {
-                setSuccessMessage("");
-            }, 3000);
-        } else{
-            setError("Kunde inte spara kommentaren. Försök igen");
+        if (response.ok) {
+          const data = await response.json();
+          setComments(data);
+        } else {
+          setError("Kunde inte visa kommentarer.");
         }
-        } catch (error){
-            setError("Ett fel inträffade när kommentaren skulle skickas.");
-        }
+      } catch (error) {
+        setError("Ett fel inträffade när kommentarerna hämtades.");
+      }
     };
+
     return(
         <div className="comment-section">
         <h3>Skriv en kommentar</h3>
