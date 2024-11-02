@@ -7,7 +7,7 @@ import './comment.css'
 const CommentSection = ({id}) =>{
     const[comments, setComments] = useState([]); 
     const[error, setError] = useState("");
-    const [sucessMessage, setSuccessMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
 
     useEffect(() =>{
         const fetchComments = async () =>{
@@ -60,17 +60,24 @@ const CommentSection = ({id}) =>{
     };
     return(
         <div className="comment-section">
-            <h3>Skriv en kommentar</h3>
-            <CommentForm onSubmit={handleSubmitComment} />
-            {sucessMessage && <p style={{ color: "green" }}>{sucessMessage}</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
-            <div class="line"></div>
-            <div className="comment-list">
+        <h3>Skriv en kommentar</h3>
+        <CommentForm onSubmit={handleSubmitComment} />
+
+        {/* Success Message */}
+        {successMessage && (
+            <div className="success-message">
+                <p>{successMessage}</p>
+            </div>
+        )}
+
+        {/* Error Message */}
+        {error && <p className="error-message">{error}</p>}
+
+        <div className="comment-list">
             <h3>Kommentarer</h3>
             <CommentList comments={comments} />
-            </div>
-                
         </div>
+    </div>
     )
 }
 export default CommentSection;

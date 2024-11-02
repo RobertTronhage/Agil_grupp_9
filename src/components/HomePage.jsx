@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import RecipeCard from "./RecipeCard";
-import Header from "./Header";
+import HeaderHome from "./HeaderHome";
 import CategoryAsideList from "./Category/CategoryAsideList";
 import Footer from "./Footer/Footer";
 import { useNavigate } from "react-router-dom";
@@ -71,7 +71,7 @@ const HomePage = () => {
 
   return (
     <div className="homepage container">
-      <Header
+      <HeaderHome
         searchTerm={searchTerm}
         onSearchChange={handleSearchChange}
         categories={categories}
@@ -83,6 +83,7 @@ const HomePage = () => {
           categories={categories}
           selectedCategory={selectedCategory}
         />
+    
         <div className="recipes homepage-recipes">
           {filteredRecipes.map((recipe, index) => (
             <RecipeCard
