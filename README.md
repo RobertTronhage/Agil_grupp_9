@@ -1,6 +1,6 @@
 # Agil_grupp_9
 
-Project work React
+Group Project React
 
 ### Project Description
 
