@@ -202,13 +202,11 @@ display: flex;
 }
 
 .recipe-comments-container{
-  min-width: 60vw;
   background-color: var(--secondaryAccentColor-transparant);
   border: 0px solid var(--border-grey);
   border-radius: 8px;
   margin-top: 2rem;
 }
-
 .recipe-description {
   text-align: center;
   margin-bottom: 20px; /* Lägg till lite utrymme under beskrivningen */
@@ -241,6 +239,7 @@ display: flex;
   height: 0;
   padding: 0;
   visibility: hidden;
+  height: auto;
 }
 
 .footer{
@@ -269,11 +268,6 @@ display: flex;
   
   .home-icon {
     visibility: hidden;
-  }
-
-  #home-info{
-    max-height: 0px;
-    visibility:collapse;
   }
   
 }
@@ -384,12 +378,11 @@ display: flex;
   }
   
   .recipe-instructions{
-    margin-left: 1rem;
-    margin-top: 0px;
+    margin: 0 1rem;
   }
   
   .recipe-ingredients{
-    margin-right: 1rem;
+    margin: 0 1rem;
   }
   
   .recipe-comments-container{
