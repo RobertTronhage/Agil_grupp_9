@@ -56,7 +56,9 @@ const RecipeCard = ({ title, imageUrl, categories, timeInMins, id }) => {
         />
       </Link>
       <div className="recipe-card-content">
+      <Link to={`/recept/${id}`}>
         <h2>{title || "Recept utan namn"}</h2>
+        </Link>
         <p>Kategori: {categories ? categories.join(", ") : "Okänd kategori"}</p>
 
         <div className="recipe-card-props">

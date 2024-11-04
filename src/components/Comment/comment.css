@@ -79,6 +79,7 @@ textarea:disabled {
 
 .comment-content{
   flex: 1;
+  max-width: 100%;
 }
 
 .comment-name{
@@ -94,4 +95,11 @@ margin: 0.5rem 0 0 0;
 font-size: 0.9rem;
 position: absolute;
 right: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .comment-content{
+    max-width: 9rem;
+  }
+
 }
