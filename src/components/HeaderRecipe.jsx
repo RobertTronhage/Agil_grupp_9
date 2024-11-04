@@ -17,9 +17,11 @@ const HeaderRecipe = ({ searchTerm, onSearchChange, categories, selectedCategory
         
         {/* Texten "Kreativa Bakelser" centrerad över sökrutan */}
         <div>
-        <span className="header-text" style={{ fontSize: '34px', fontWeight: 'bold' }}>
+        <Link to="/">
+        <span style={{ fontSize: '34px', fontWeight: 'bold' }}>
           Kreativa Bakelser
         </span>
+            </Link>
         <p>Låt fantasin jäsa i köket!</p>
         </div>
       </div>

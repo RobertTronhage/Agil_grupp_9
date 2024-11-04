@@ -33,7 +33,6 @@ const RatingDisplay = ({ id }) => {
         const data = await response.json();
         if (data.avgRating != null) {
           setRating(roundToOneDecimal(data.avgRating));
-          console.log(rating);
         } else {
           setRating(0);
         }
