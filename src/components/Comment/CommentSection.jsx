@@ -52,8 +52,21 @@ const CommentSection = ({id}) =>{
             }
         );
         if (response.ok) {
-          const data = await response.json();
-          setComments(data);
+
+            const newCommentData = await response.json();
+
+            // Uppdatera `comments` lokalt med den nya kommentaren
+            setComments((prevComments) => [...prevComments, newCommentData]);
+
+            // Visa ett framgångsmeddelande
+            setSuccessMessage("Tack för din kommentar");
+            setError("");  // Rensa tidigare felmeddelanden om något fanns
+
+              // Ta bort success-meddelandet efter 5 sekunder
+            setTimeout(() => {
+                setSuccessMessage("");
+            }, 5000); // 5000 ms = 5 sekunder
+            
         } else {
           setError("Kunde inte visa kommentarer.");
         }

@@ -202,7 +202,6 @@ display: flex;
 }
 
 .recipe-comments-container{
-  min-width: 60vw;
   background-color: var(--secondaryAccentColor-transparant);
   border: 0px solid var(--border-grey);
   border-radius: 8px;

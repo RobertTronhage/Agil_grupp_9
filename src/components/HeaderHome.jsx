@@ -18,14 +18,17 @@ const HeaderHome = ({ searchTerm, onSearchChange, categories, selectedCategory, 
 
         {/* Texten "Kreativa Bakelser" centrerad över sökrutan */}
         <div className='header-text'>
+            <Link to="/">
         <span style={{ fontSize: '34px', fontWeight: 'bold' }}>
           Kreativa Bakelser
         </span>
+            </Link>
         <p id='home-info'>Välkommen till en värld av fantasifulla bakverk! 
             Här hittar du allt från magiska tårtor till kreativa kakor – 
             perfekta för alla dina favorithögtider. 
             Låt dig inspireras och upptäck unika godsaker som får varje högtid att 
             kännas mer speciell</p>
+        <p id='slogan'>Låt fantasin jäsa i köket!</p>
         </div>
       </div>
 

@@ -1,6 +1,5 @@
 import React from "react";
 import "./comment.css";
-import { FaUser } from "react-icons/fa6";
 import { FaRegCircleUser } from "react-icons/fa6";
 
 /**
@@ -14,7 +13,9 @@ import { FaRegCircleUser } from "react-icons/fa6";
  * @returns {JSX.Element} A JSX element containing the list of comments.
  */
 function CommentList({ comments }) {
-  const reverseComments = [...comments].reverse();
+
+  // Kontrollera att comments är en array, eller använd en tom array som standardvärde
+  const reverseComments = Array.isArray(comments) ? [...comments].reverse() : [];
   const commentListItem = reverseComments.map((reverseComments, index) => {
     const date = new Date(reverseComments.createdAt);
     const formattedDate = date.toLocaleDateString();
