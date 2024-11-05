@@ -8,7 +8,7 @@ This project is a React-based web application developed by Agil_grupp_9. The pur
 
 ### Folder Structure
 
-The project's folder structure is as follows:
+The project's structure is as follows:
 
 App.jsx → {JSX.Element}
 The main application component that sets up the routing for the app.
