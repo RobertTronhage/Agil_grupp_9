@@ -19,6 +19,8 @@ const Rating = ({ id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
+  const [hasSubmitted, setHasSubmitted] = useState(false); 
+  const [showStars, setShowStars] = useState(true);
 
   const roundToOneDecimal = (num) => Number(num.toFixed(1));
 
@@ -36,6 +38,11 @@ const Rating = ({ id }) => {
         } else {
           setRating(0);
         }
+
+        // Kontrollera om användaren redan har skickat in en rating för detta recept
+        const submittedRatings = JSON.parse(sessionStorage.getItem("submittedRatings")) || {};
+        setHasSubmitted(!!submittedRatings[id]); // Om receptets ID finns, har användaren redan skickat in
+
       } else {
         setMessage("Kunde inte hämta betyget.");
       }
@@ -49,7 +56,22 @@ const Rating = ({ id }) => {
     fetchRating();
   }, [id]);
 
+  useEffect(() => {
+    if (message && hasSubmitted) {
+      const timer = setTimeout(() =>{
+        setMessage(""); 
+        setShowStars(true);
+      }, 3000); // Ta bort meddelandet efter 3 sekunder
+      return () => clearTimeout(timer); // Rensa timer när komponenten avmonteras eller när message ändras
+    }
+  }, [message, hasSubmitted]);
+
   const handleRatingChange = async (newRating) => {
+    if (hasSubmitted) {
+      setMessage("Du har redan skickat in ditt betyg för detta recept.");
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const response = await fetch(
@@ -65,7 +87,16 @@ const Rating = ({ id }) => {
 
       if (response.ok) {
         setMessage("Tack för ditt betyg!");
+        setShowStars(false);
         fetchRating();
+
+        // Uppdatera inskickad status både i state och i localStorage
+        setHasSubmitted(true);
+        const submittedRatings = JSON.parse(sessionStorage.getItem("submittedRatings")) || {};
+        submittedRatings[id] = true;
+        sessionStorage.setItem("submittedRatings", JSON.stringify(submittedRatings));
+
+
       } else {
         const errorData = await response.json();
         setMessage(`Ett fel inträffade: ${errorData.message}`);
@@ -74,8 +105,6 @@ const Rating = ({ id }) => {
       setMessage("Ett fel inträffade vid inskickning.");
     }
     setIsSubmitting(false);
-    // Rensa meddelande efter några sekunder
-    setTimeout(() => setMessage(""), 3000);
   };
 
   if (isLoading) {
@@ -84,23 +113,29 @@ const Rating = ({ id }) => {
   return (
     <div className="rating">
       <p>Betyg: {rating}/5</p>
-      <div className="star">
-        {[1, 2, 3, 4, 5].map((value) => (
-          <span
-            key={value}
-            onClick={() => handleRatingChange(value)}
-            style={{
-              color: value <= rating ? "gold" : "lightgray",
-              cursor: "pointer",
-              fontSize: "1.3rem",
-              pointerEvents: isSubmitting ? "none" : "auto", //inaktivera om betyget skickas
-            }}
-          >
-            ★
-          </span>
-        ))}
-      </div>
-      {message && <p>{message}</p>}
+      {message && !showStars ? (
+        <p>{message}</p>
+      ) : (
+        <div className="star">
+          {[1, 2, 3, 4, 5].map((value) => (
+            <span
+              key={value}
+              onClick={() => handleRatingChange(value)}
+              style={{
+                color: value <= rating ? "gold" : "lightgray",
+                cursor: isSubmitting ? "not-allowed" : "pointer",
+                fontSize: "1.3rem",
+                pointerEvents: isSubmitting ? "none" : "auto", //inactivate if a rating has been set during a session or is submitting 
+              }}
+            >
+              ★
+            </span>
+          ))}
+        </div>
+      )}
+        {hasSubmitted && message && (
+        <p >{message}</p>
+      )}
     </div>
   );
 };
