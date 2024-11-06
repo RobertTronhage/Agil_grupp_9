@@ -21,6 +21,7 @@ const Rating = ({ id }) => {
   const [message, setMessage] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false); 
   const [showStars, setShowStars] = useState(true);
+  const [attemptedToRate, setAttemptedToRate] = useState(false);
 
   const roundToOneDecimal = (num) => Number(num.toFixed(1));
 
@@ -56,19 +57,12 @@ const Rating = ({ id }) => {
     fetchRating();
   }, [id]);
 
-  useEffect(() => {
-    if (message && hasSubmitted) {
-      const timer = setTimeout(() =>{
-        setMessage(""); 
-        setShowStars(true);
-      }, 3000); // Ta bort meddelandet efter 3 sekunder
-      return () => clearTimeout(timer); // Rensa timer när komponenten avmonteras eller när message ändras
-    }
-  }, [message, hasSubmitted]);
-
   const handleRatingChange = async (newRating) => {
     if (hasSubmitted) {
-      setMessage("Du har redan skickat in ditt betyg för detta recept.");
+      setAttemptedToRate(true);
+      setTimeout(() => {
+        setAttemptedToRate(false); 
+      }, 3000);
       return;
     }
 
@@ -88,10 +82,13 @@ const Rating = ({ id }) => {
       if (response.ok) {
         setMessage("Tack för ditt betyg!");
         setShowStars(false);
+        setTimeout(() => {
+          setMessage(""); // Ta bort meddelandet efter 3 sekunder
+        }, 3000);
         fetchRating();
-
-        // Uppdatera inskickad status både i state och i localStorage
         setHasSubmitted(true);
+
+        
         const submittedRatings = JSON.parse(sessionStorage.getItem("submittedRatings")) || {};
         submittedRatings[id] = true;
         sessionStorage.setItem("submittedRatings", JSON.stringify(submittedRatings));
@@ -133,8 +130,8 @@ const Rating = ({ id }) => {
           ))}
         </div>
       )}
-        {hasSubmitted && message && (
-        <p >{message}</p>
+         {attemptedToRate && hasSubmitted && !message && (
+        <p>Du har redan skickat in ditt betyg för detta recept.</p>
       )}
     </div>
   );
