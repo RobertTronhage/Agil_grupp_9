@@ -23,7 +23,7 @@ const RecipeDetail = () => {
     useEffect(() => {
       const fetchRecipe = async () => {
         try {
-          const response = await fetch(`https://recept9-pedal.reky.se/recipes/${id}`); // Byt ut med den faktiska URL:en för recept
+          const response = await fetch(`https://recept9-pedal.reky.se/recipes/${id}`); 
           if (!response.ok) {
             throw new Error("Något gick fel vid hämtningen av recepten.");
           }
@@ -45,7 +45,7 @@ const RecipeDetail = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("https://recept9-pedal.reky.se/categories"); // Byt ut med den faktiska URL:en för kategorier
+        const response = await fetch("https://recept9-pedal.reky.se/categories"); 
         if (!response.ok) {
           throw new Error("Något gick fel vid hämtningen av kategorierna.");
         }
